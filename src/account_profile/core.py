@@ -55,14 +55,14 @@ class Profile( object ):
         Args:
             n_units( int ): The number of units to increase the sms usage counter
         """
-        pass
+        self.sms_usage = self.sms_usage + n_units
 
     def get_SMS_usage( self ):
         """
         Returns:
             An integer value representing the number of sms
         """
-        pass
+        return self.sms_usage
 
     def add_internet( self, n_bytes ):
         """
