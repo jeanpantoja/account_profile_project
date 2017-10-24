@@ -17,12 +17,8 @@ class Profile( object ):
         Returns:
             A value representing the usage in minutes
         """
-        usage = 0
-
-        for call in self.calls:
-            if call.is_long_distance() and call.is_destiny_landline():
-                usage = usage + call.duration
-
+        condition = lambda call: call.is_long_distance() and call.is_destiny_landline()
+        usage = Call.sum_duration( self.calls, condition )
         return usage
 
     def get_long_distance_mobile_call_usage( self ):
@@ -30,12 +26,8 @@ class Profile( object ):
         Returns:
             A value representing the usage in minutes
         """
-        usage = 0
-
-        for call in self.calls:
-            if call.is_long_distance() and call.is_destiny_mobile():
-                usage = usage + call.duration
-
+        condition = lambda call: call.is_long_distance() and call.is_destiny_mobile()
+        usage = Call.sum_duration( self.calls, condition )
         return usage
 
     def get_local_landline_call_usage( self ):
@@ -117,3 +109,18 @@ class Call( object ):
 
     def is_destiny_mobile( self ):
         return self.call_destiny_type == Call.DestinyType.MOBILE
+
+    @staticmethod
+    def sum_duration( calls, condition ):
+        """
+        Args:
+            calls( list ): The list of call instances to compute duration sum
+            condition( callable ): A callable that with format condition( call_instance )->bool
+        """
+        duration = 0
+
+        for call in filter( condition, calls ):
+            duration = duration + call.duration
+
+        return duration
+
