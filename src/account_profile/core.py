@@ -2,6 +2,9 @@ import enum
 
 class Profile( object ):
 
+    def __init__( self ):
+        self.calls = []
+
     def add_call( self, call ):
         """
         Args:
