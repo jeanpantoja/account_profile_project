@@ -4,6 +4,8 @@ class Profile( object ):
 
     def __init__( self ):
         self.calls = []
+        self.internet_usage = 0
+        self.sms_usage = 0
 
     def add_call( self, call ):
         """
