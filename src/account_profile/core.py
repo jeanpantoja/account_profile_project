@@ -69,14 +69,14 @@ class Profile( object ):
         Args:
             n_bytes( int ): The number of bytes to increase the internet usage counter
         """
-        pass
+        self.internet_usage = self.internet_usage + n_bytes
 
     def get_internet_usage( self ):
         """
         Returns:
             An integer value representing the number of bytes
         """
-        pass
+        return self.internet_usage
 
 
 
