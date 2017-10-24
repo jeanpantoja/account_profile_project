@@ -98,6 +98,7 @@ class Call( object ):
         return self.call_type == Call.Type.LONG_DISTANCE
 
     def is_destiny_landline( self ):
-        pass
+        return self.call_destiny_type == Call.DestinyType.LANDLINE
+
     def is_destiny_mobile( self ):
         pass
