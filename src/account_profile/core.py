@@ -44,7 +44,9 @@ class Profile( object ):
         Returns:
             A value representing the usage in minutes
         """
-        pass
+        condition = lambda call: call.is_local() and call.is_destiny_mobile()
+        usage = Call.sum_duration( self.calls, condition )
+        return usage
 
     def add_SMS( self, n_units ):
         """
