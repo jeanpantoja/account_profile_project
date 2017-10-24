@@ -91,4 +91,14 @@ class Call( object ):
         self.call_destiny_type = call_destiny_type
         self.duration = duration
 
+    def is_local( self ):
+        pass
 
+    def is_long_distance( self ):
+        pass
+
+    def is_destiny_landline( self ):
+        pass
+
+    def is_destiny_mobile( self ):
+        pass

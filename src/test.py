@@ -57,5 +57,35 @@ class TestProfile( unittest.TestCase ):
         profile.add_internet( 2 )
         self.assertEqual( profile.get_internet_usage(), 3 )
 
+class TestCall( unittest.TestCase ):
+
+    def test_is_long_distance( self ):
+        call = core.Call( core.Call.Type.LONG_DISTANCE,
+                          core.Call.DestinyType.LANDLINE,
+                          0 )
+
+        self.assertEqual( True, call.is_long_distance() )
+
+    def test_is_local( self ):
+        call = core.Call( core.Call.Type.LOCAL,
+                          core.Call.DestinyType.LANDLINE,
+                          0 )
+
+        self.assertEqual( True, call.is_local() )
+
+    def test_is_destiny_landline( self ):
+        call = core.Call( core.Call.Type.LOCAL,
+                          core.Call.DestinyType.LANDLINE,
+                          0 )
+
+        self.assertEqual( True, call.is_destiny_landline() )
+
+    def test_is_destiny_mobile( self ):
+        call = core.Call( core.Call.Type.LOCAL,
+                          core.Call.DestinyType.MOBILE,
+                          0 )
+
+        self.assertEqual( True, call.is_destiny_mobile() )
+
 if __name__ == "__main__":
     unittest.main()
