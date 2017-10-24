@@ -30,7 +30,13 @@ class Profile( object ):
         Returns:
             A value representing the usage in minutes
         """
-        pass
+        usage = 0
+
+        for call in self.calls:
+            if call.is_long_distance() and call.is_destiny_mobile():
+                usage = usage + call.duration
+
+        return usage
 
     def get_local_landline_call_usage( self ):
         """
