@@ -35,7 +35,9 @@ class Profile( object ):
         Returns:
             A value representing the usage in minutes
         """
-        pass
+        condition = lambda call: call.is_local() and call.is_destiny_landline()
+        usage = Call.sum_duration( self.calls, condition )
+        return usage
 
     def get_local_mobile_call_usage( self ):
         """
