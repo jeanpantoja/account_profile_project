@@ -10,7 +10,7 @@ class Profile( object ):
         Args:
             call ( account_profile.core.Call ): The call you desire add in profile
         """
-        pass
+        self.calls.append( call )
 
     def get_long_distance_landline_call_usage( self ):
         """
