@@ -101,4 +101,4 @@ class Call( object ):
         return self.call_destiny_type == Call.DestinyType.LANDLINE
 
     def is_destiny_mobile( self ):
-        pass
+        return self.call_destiny_type == Call.DestinyType.MOBILE
