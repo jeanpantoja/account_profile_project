@@ -87,5 +87,8 @@ class Call( object ):
 
             duration( float ): Call duration in minutes
         """
-        pass
+        self.call_type = call_type
+        self.call_destiny_type = call_destiny_type
+        self.duration = duration
+
 
