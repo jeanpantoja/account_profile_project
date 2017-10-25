@@ -3,6 +3,7 @@ import re
 
 class BillLine( object ):
     SMS_REGEX = r'TIM\s*Torpedo|Serviços\s*de\s*SMS'
+    INTERNET_REGEX = r'TIM\s*(Wap\s*Fast|Connect\s*Fast)|BlackBerry\s*Professional\s*-\s*MB'
 
     def __init__( self, bill_line ):
         """
@@ -29,7 +30,9 @@ class BillLine( object ):
         Returns:
             True if is relative to internet access otherwise return False
         """
-        pass
+
+        match = re.search( BillLine.INTERNET_REGEX, self.service_type, re.I )
+        return bool( match )
 
     def retrieve_call_features( self ):
         """
