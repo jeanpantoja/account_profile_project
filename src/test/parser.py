@@ -32,7 +32,7 @@ class TestBillLine( unittest.TestCase ):
         }
 
         bline = parser.BillLine( line )
-        self.assertEqual( True, bline.is_SMS() )
+        self.assertEqual( True, bline.is_internet() )
 
         line = {
             "Tpserv" : "TIM Connect Fast",
@@ -40,7 +40,7 @@ class TestBillLine( unittest.TestCase ):
         }
 
         bline = parser.BillLine( line )
-        self.assertEqual( True, bline.is_SMS() )
+        self.assertEqual( True, bline.is_internet() )
 
         line = {
             "Tpserv" : "BlackBerry Professional - MB",
@@ -48,7 +48,7 @@ class TestBillLine( unittest.TestCase ):
         }
 
         bline = parser.BillLine( line )
-        self.assertEqual( True, bline.is_SMS() )
+        self.assertEqual( True, bline.is_internet() )
 
     def test_features_from_local_call_to_mobile( self ):
         line = {
