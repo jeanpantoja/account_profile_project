@@ -81,40 +81,36 @@ class Profile( object ):
 
 
 class Call( object ):
-    class Type( enum.Enum ):
-        LONG_DISTANCE = 0
-        LOCAL = 1
+    class Features( enum.IntEnum ):
+        LONG_DISTANCE = 0b00001
+        LOCAL = 0b0010
+        DEST_LANDLINE = 0b0100
+        DEST_MOBILE = 0b1000
 
-    class DestinyType( enum.Enum ):
-        LANDLINE = 0
-        MOBILE = 1
-
-    def __init__( self, call_type, call_destiny_type, duration ):
+    def __init__( self, call_features, duration ):
         """
         Args:
-            call_type ( account_profile.core.Call.Type ): Enum value
-                of available types
-
-            call_destiny_type ( account_profile.core.Call.DestinyType ): Enum value
-                of available destiny types
+            call_features ( account_profile.core.Call.Features ): Feature
+                flag from call. Use or bitwise operation to set the flag.
+                Example a call that is Local to a mobile phone:
+                   call = Call( Call.Features.LOCAL | Call.Features.DEST_MOBILE, 2.5 )
 
             duration( float ): Call duration in minutes
         """
-        self.call_type = call_type
-        self.call_destiny_type = call_destiny_type
+        self.call_features = call_features
         self.duration = duration
 
     def is_local( self ):
-        return self.call_type == Call.Type.LOCAL
+        return bool( self.call_features & Call.Features.LOCAL )
 
     def is_long_distance( self ):
-        return self.call_type == Call.Type.LONG_DISTANCE
+        return bool( self.call_features & Call.Features.LONG_DISTANCE )
 
     def is_destiny_landline( self ):
-        return self.call_destiny_type == Call.DestinyType.LANDLINE
+        return bool( self.call_features & Call.Features.DEST_LANDLINE )
 
     def is_destiny_mobile( self ):
-        return self.call_destiny_type == Call.DestinyType.MOBILE
+        return bool( self.call_features & Call.Features.DEST_MOBILE )
 
     @staticmethod
     def sum_duration( calls, condition ):

@@ -5,9 +5,9 @@ class TestProfile( unittest.TestCase ):
 
     def test_adding_long_distance_landline_call( self ):
         profile = core.Profile()
-        call = core.Call( core.Call.Type.LONG_DISTANCE,
-                          core.Call.DestinyType.LANDLINE,
-                          1 )
+        feature = ( core.Call.Features.LONG_DISTANCE
+                    | core.Call.Features.DEST_LANDLINE )
+        call = core.Call( feature, 1 )
 
         profile.add_call( call )
         profile.add_call( call )
@@ -15,9 +15,9 @@ class TestProfile( unittest.TestCase ):
 
     def test_adding_long_distance_mobile_call( self ):
         profile = core.Profile()
-        call = core.Call( core.Call.Type.LONG_DISTANCE,
-                          core.Call.DestinyType.MOBILE,
-                          2 )
+        feature = ( core.Call.Features.LONG_DISTANCE
+                    | core.Call.Features.DEST_MOBILE )
+        call = core.Call( feature, 2 )
 
         profile.add_call( call )
         profile.add_call( call )
@@ -25,9 +25,9 @@ class TestProfile( unittest.TestCase ):
 
     def test_adding_local_landline_call( self ):
         profile = core.Profile()
-        call = core.Call( core.Call.Type.LOCAL,
-                          core.Call.DestinyType.LANDLINE,
-                          3 )
+        feature = ( core.Call.Features.LOCAL
+                    | core.Call.Features.DEST_LANDLINE )
+        call = core.Call( feature, 3 )
 
         profile.add_call( call )
         profile.add_call( call )
@@ -35,9 +35,9 @@ class TestProfile( unittest.TestCase ):
 
     def test_adding_local_mobile_call( self ):
         profile = core.Profile()
-        call = core.Call( core.Call.Type.LOCAL,
-                          core.Call.DestinyType.MOBILE,
-                           4)
+        feature = ( core.Call.Features.LOCAL
+                    | core.Call.Features.DEST_MOBILE )
+        call = core.Call( feature, 4 )
 
         profile.add_call( call )
         profile.add_call( call )
@@ -60,30 +60,30 @@ class TestProfile( unittest.TestCase ):
 class TestCall( unittest.TestCase ):
 
     def test_is_long_distance( self ):
-        call = core.Call( core.Call.Type.LONG_DISTANCE,
-                          core.Call.DestinyType.LANDLINE,
-                          0 )
+        feature = ( core.Call.Features.LONG_DISTANCE
+                    | core.Call.Features.DEST_LANDLINE )
+        call = core.Call( feature, 0 )
 
         self.assertEqual( True, call.is_long_distance() )
 
     def test_is_local( self ):
-        call = core.Call( core.Call.Type.LOCAL,
-                          core.Call.DestinyType.LANDLINE,
-                          0 )
+        feature = ( core.Call.Features.LOCAL
+                    | core.Call.Features.DEST_LANDLINE )
+        call = core.Call( feature, 0 )
 
         self.assertEqual( True, call.is_local() )
 
     def test_is_destiny_landline( self ):
-        call = core.Call( core.Call.Type.LOCAL,
-                          core.Call.DestinyType.LANDLINE,
-                          0 )
+        feature = ( core.Call.Features.LOCAL
+                    | core.Call.Features.DEST_LANDLINE )
+        call = core.Call( feature, 0 )
 
         self.assertEqual( True, call.is_destiny_landline() )
 
     def test_is_destiny_mobile( self ):
-        call = core.Call( core.Call.Type.LOCAL,
-                          core.Call.DestinyType.MOBILE,
-                          0 )
+        feature = ( core.Call.Features.LOCAL
+                    | core.Call.Features.DEST_MOBILE )
+        call = core.Call( feature, 0 )
 
         self.assertEqual( True, call.is_destiny_mobile() )
 
