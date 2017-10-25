@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+import re
 
 class BillLine( object ):
+    SMS_REGEX = r'TIM\s*Torpedo'
 
     def __init__( self, bill_line ):
         """
         Args:
             bill_line( dict ): A dict with all fields from a bill line
         """
-        self.bill_line = bill_line
+        self.service_type = bill_line[ "Tpserv" ]
 
     def is_SMS( self ):
         """
@@ -16,7 +18,9 @@ class BillLine( object ):
         Returns:
             True if is a SMS sending otherwise return False
         """
-        pass
+
+        match = re.search( BillLine.SMS_REGEX, self.service_type, re.I )
+        return bool( match )
 
     def is_internet( self ):
         """
