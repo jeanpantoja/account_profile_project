@@ -4,6 +4,7 @@ import re
 class BillLine( object ):
     SMS_REGEX = r'TIM\s*Torpedo|Serviços\s*de\s*SMS'
     INTERNET_REGEX = r'TIM\s*(Wap\s*Fast|Connect\s*Fast)|BlackBerry\s*Professional\s*-\s*MB'
+    LONG_DISTANCE_CALL_REGEX = r'Chamadas\s*Longa\s*(Distância|Distancia)'
 
     def __init__( self, bill_line ):
         """
@@ -46,7 +47,9 @@ class BillLine( object ):
         Returns:
             True if is a long distance call  otherwise return False
         """
-        pass
+
+        match = re.search( BillLine.LONG_DISTANCE_CALL_REGEX, self.service_type, re.I )
+        return bool( match )
 
     def is_local_call( self ):
         """
