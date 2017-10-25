@@ -128,3 +128,58 @@ class Call( object ):
 
         return duration
 
+class Duration( object ):
+
+    def __init__( self, minutes = 0, seconds = 0 ):
+        """
+        Args:
+            minutes( int ): Number of minutes. Must be bigger than -1
+            seconds( int ): Number of seconds. Must be bigger than -1 and less than 60
+
+        Raises:
+            Exception if minutes or seconds is not valid
+        """
+
+        self.seconds = Duration._calculate_seconds( minutes, seconds )
+
+    @staticmethod
+    def from_string( duration ):
+        """
+        Args:
+            duration( str ): A duration representation in format %dm%ds
+
+        Returns:
+            New account_profile.core.Duration instance created from string
+
+        Raises:
+            Exception if the duration string is not valid
+        """
+
+        return Duration()
+
+    @staticmethod
+    def _calculate_seconds( minutes, seconds ):
+        """
+        Args:
+            minutes( int ): Number of minutes
+            seconds( int ): Number of seconds
+        """
+
+        return 0
+
+    def __add__( self, duration ):
+        """
+        Args:
+            duration( account_profile.core.Duration ): A duration to add with this
+
+        Returns:
+            New account_profile.core.Duration whit the addition result
+        """
+        return self
+
+    def to_minutes( self ):
+        return 0
+
+    def to_seconds( self ):
+        return 0
+

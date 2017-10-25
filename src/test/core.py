@@ -88,3 +88,35 @@ class TestCall( unittest.TestCase ):
         call = core.Call( feature )
 
         self.assertEqual( True, call.is_destiny_mobile() )
+
+class TestDuration( unittest.TestCase ):
+
+    def test_creation( self ):
+        duration = core.Duration( 1, 30 )
+        self.assertEqual( duration.to_seconds(), 90 )
+
+    def test_creation_from_string( self ):
+        duration = core.Duration.from_string( "2m30s")
+        self.assertEqual( duration.to_seconds(), 150 )
+
+    def test_invalid_creation( self ):
+        with self.assertRaises( Exception ):
+            core.Duration( -1, 90 )
+
+    def test_invalid_creation_from_string( self ):
+        with self.assertRaises( Exception ):
+            core.Duration.from_string( "-1m90s")
+
+    def test_addition_seconds_result( self ):
+        duration_01 = core.Duration( 1, 30 )
+        duration_02 = core.Duration( 2, 30 )
+        duration_03 = duration_01 + duration_02
+
+        self.assertEqual( duration_03.to_seconds(), 90 + 150  )
+
+    def test_addition_minutes_result( self ):
+        duration_01 = core.Duration( 2, 20 )
+        duration_02 = core.Duration( 3, 10 )
+        duration_03 = duration_01 + duration_02
+
+        self.assertAlmostEqual( duration_03.to_minutes(), 5.5  )
