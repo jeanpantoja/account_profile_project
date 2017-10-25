@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import account_profile.core as core
 
 class BillLine( object ):
     SMS_REGEX = r'TIM\s*Torpedo|Serviços\s*de\s*SMS'
@@ -44,7 +45,24 @@ class BillLine( object ):
         Returns:
             An integer flag with all features detected
         """
-        return 0
+        features = 0
+
+        if not self.is_call():
+            return features
+
+        if( self.is_long_distance_call() ):
+            features = features | core.Call.Features.LONG_DISTANCE
+
+        if( self.is_local_call() ):
+            features = features | core.Call.Features.LOCAL
+
+        if( self.is_destiny_call_landline() ):
+            features = features | core.Call.Features.DEST_LANDLINE
+
+        if( self.is_destiny_call_mobile() ):
+            features = features | core.Call.Features.DEST_MOBILE
+
+        return features
 
     def is_long_distance_call( self ):
         """
