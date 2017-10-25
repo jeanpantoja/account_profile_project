@@ -201,10 +201,12 @@ class Duration( object ):
         Returns:
             New account_profile.core.Duration whit the addition result
         """
-        return self
+        result = Duration()
+        result._seconds = self._seconds + duration._seconds
+        return result
 
     def to_minutes( self ):
-        return 0
+        return float( self._seconds ) / Duration.SECONDS_BY_MINUTE
 
     def to_seconds( self ):
         return self._seconds
