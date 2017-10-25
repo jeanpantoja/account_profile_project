@@ -15,6 +15,7 @@ class BillLine( object ):
         Args:
             bill_line( dict ): A dict with all fields from a bill line
         """
+
         self.service_type = bill_line[ "Tpserv" ]
         self.destiny = bill_line[ "Destino" ]
 
@@ -45,6 +46,7 @@ class BillLine( object ):
         Returns:
             An integer flag with all features detected
         """
+
         features = 0
 
         if not self.is_call():
@@ -101,6 +103,7 @@ class BillLine( object ):
         Returns:
             True if is a call to a landline phone otherwise return False
         """
+
         matchService = re.search( BillLine.DEST_CALL_LANDLINE_REGEX,
                                   self.service_type, re.I )
 
