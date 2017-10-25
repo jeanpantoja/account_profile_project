@@ -62,28 +62,28 @@ class TestCall( unittest.TestCase ):
     def test_is_long_distance( self ):
         feature = ( core.Call.Features.LONG_DISTANCE
                     | core.Call.Features.DEST_LANDLINE )
-        call = core.Call( feature, 0 )
+        call = core.Call( feature )
 
         self.assertEqual( True, call.is_long_distance() )
 
     def test_is_local( self ):
         feature = ( core.Call.Features.LOCAL
                     | core.Call.Features.DEST_LANDLINE )
-        call = core.Call( feature, 0 )
+        call = core.Call( feature )
 
         self.assertEqual( True, call.is_local() )
 
     def test_is_destiny_landline( self ):
         feature = ( core.Call.Features.LOCAL
                     | core.Call.Features.DEST_LANDLINE )
-        call = core.Call( feature, 0 )
+        call = core.Call( feature )
 
         self.assertEqual( True, call.is_destiny_landline() )
 
     def test_is_destiny_mobile( self ):
         feature = ( core.Call.Features.LOCAL
                     | core.Call.Features.DEST_MOBILE )
-        call = core.Call( feature, 0 )
+        call = core.Call( feature )
 
         self.assertEqual( True, call.is_destiny_mobile() )
 

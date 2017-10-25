@@ -87,7 +87,7 @@ class Call( object ):
         DEST_LANDLINE = 0b0100
         DEST_MOBILE = 0b1000
 
-    def __init__( self, call_features, duration ):
+    def __init__( self, call_features, duration = 0):
         """
         Args:
             call_features ( account_profile.core.Call.Features ): Feature
