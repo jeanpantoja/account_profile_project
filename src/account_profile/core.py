@@ -129,18 +129,27 @@ class Call( object ):
         return duration
 
 class Duration( object ):
+    SECONDS_BY_MINUTE = 60
 
     def __init__( self, minutes = 0, seconds = 0 ):
         """
         Args:
             minutes( int ): Number of minutes. Must be bigger than -1
-            seconds( int ): Number of seconds. Must be bigger than -1 and less than 60
+            seconds( int ): Number of seconds. Must be in interval [ 0, 59 ]
 
         Raises:
             Exception if minutes or seconds is not valid
         """
 
-        self.seconds = Duration._calculate_seconds( minutes, seconds )
+        if not ( minutes > -1 ):
+            msg = "The param minutes[%d] must be bigger than -1" % ( minutes )
+            raise Exception( msg )
+
+        if not ( seconds >= 0 and seconds <= 59 ):
+            msg =  "The param seconds[%d] must be in interval [ 0, 59 ]" % ( minutes )
+            raise Exception( msg )
+
+        self._seconds = Duration._calculate_seconds( minutes, seconds )
 
     @staticmethod
     def from_string( duration ):
@@ -163,9 +172,12 @@ class Duration( object ):
         Args:
             minutes( int ): Number of minutes
             seconds( int ): Number of seconds
+
+        Returns:
+            The computed seconds
         """
 
-        return 0
+        return minutes * Duration.SECONDS_BY_MINUTE + seconds
 
     def __add__( self, duration ):
         """
@@ -181,5 +193,5 @@ class Duration( object ):
         return 0
 
     def to_seconds( self ):
-        return 0
+        return self._seconds
 
