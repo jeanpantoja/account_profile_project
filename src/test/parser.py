@@ -103,33 +103,23 @@ class TestBillLine( unittest.TestCase ):
                           core.Call.Features.DEST_LANDLINE )
 
     def test_is_destiny_call_mobile( self ):
-        lines = constants.BILL_LINES_OF_CALL_TO_MOBILE_PHONE
-
-        for line in lines:
-            bline = parser.BillLine( line )
-            msg = "[%s/%s] is not valid" % ( line[ "Tpserv" ], line[ "Destino" ] )
-            self.assertEqual( True, bline.is_destiny_call_mobile(), msg = msg )
+        self._test_calls( parser.BillLine.is_destiny_call_mobile,
+                          constants.BILL_LINES_OF_CALL_TO_MOBILE_PHONE )
 
     def test_is_destiny_call_landline( self ):
-        lines = constants.BILL_LINES_OF_CALL_TO_LANDLINE_PHONE
+        self._test_calls( parser.BillLine.is_destiny_call_landline,
+                          constants.BILL_LINES_OF_CALL_TO_LANDLINE_PHONE )
 
+    def test_is_long_distance_call( self ):
+        self._test_calls( parser.BillLine.is_long_distance_call,
+                          constants.BILL_LINES_OF_LONG_DISTANCE_CALL )
+
+    def test_is_local_call( self ):
+        self._test_calls( parser.BillLine.is_local_call,
+                          constants.BILL_LINES_OF_LOCAL_CALL )
+
+    def _test_calls( self, assertion, lines ):
         for line in lines:
             bline = parser.BillLine( line )
             msg = "[%s/%s] is not valid" % ( line[ "Tpserv" ], line[ "Destino" ] )
-            self.assertEqual( True, bline.is_destiny_call_landline(), msg = msg )
-
-    def test_is_long_distance_call( self ):
-        lines = constants.BILL_LINES_OF_LONG_DISTANCE_CALL
-
-        for line in lines:
-            bline = parser.BillLine( line )
-            msg = "[%s] is not valid" % ( line[ "Tpserv" ] )
-            self.assertEqual( True, bline.is_long_distance_call(), msg = msg )
-
-    def test_is_local_call( self ):
-        lines = constants.BILL_LINES_OF_LOCAL_CALL
-
-        for line in lines:
-            bline = parser.BillLine( line )
-            msg = "[%s] is not valid" % ( line[ "Tpserv" ] )
-            self.assertEqual( True, bline.is_local_call(), msg = msg )
+            self.assertEqual( True, assertion( bline ), msg = msg )
