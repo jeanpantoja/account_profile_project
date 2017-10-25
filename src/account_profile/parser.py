@@ -7,6 +7,7 @@ class BillLine( object ):
     LONG_DISTANCE_CALL_REGEX = r'Chamadas\s*Longa\s*(Distância|Distancia)'
     LOCAL_CALL_REGEX = r'Chamadas\s*Locais'
     DEST_CALL_MOBILE_REGEX = r'Movel|Celulares'
+    DEST_CALL_LANDLINE_REGEX = r'Fixo'
 
     def __init__( self, bill_line ):
         """
@@ -82,7 +83,13 @@ class BillLine( object ):
         Returns:
             True if is a call to a landline phone otherwise return False
         """
-        pass
+        matchService = re.search( BillLine.DEST_CALL_LANDLINE_REGEX,
+                                  self.service_type, re.I )
+
+        matchDest = re.search( BillLine.DEST_CALL_LANDLINE_REGEX,
+                               self.destiny, re.I )
+
+        return bool( self.is_call() and ( matchDest or matchService ) )
 
     def is_call( self ):
         return self.is_local_call() or self.is_long_distance_call()
