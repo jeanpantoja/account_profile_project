@@ -55,7 +55,11 @@ BILL_LINES_OF_CALL_TO_MOBILE_PHONE = [
     {
         "Tpserv" : "Chamadas Longa Distância: TIM LD 41",
         "Destino" : "SC MOVEL TIM - AREA 48"
-    }
+    },
+    {
+        "Tpserv" : "Chamadas Locais para Celulares TIM",
+        "Destino" : "SC TIM AREA 48"
+    },
 ]
 
 BILL_LINES_OF_CALL_TO_LANDLINE_PHONE = [
