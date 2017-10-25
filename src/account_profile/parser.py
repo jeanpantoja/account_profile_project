@@ -2,7 +2,7 @@
 import re
 
 class BillLine( object ):
-    SMS_REGEX = r'TIM\s*Torpedo'
+    SMS_REGEX = r'TIM\s*Torpedo|Serviços\s*de\s*SMS'
 
     def __init__( self, bill_line ):
         """
