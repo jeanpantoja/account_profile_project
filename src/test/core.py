@@ -9,7 +9,7 @@ class TestProfile( unittest.TestCase ):
         profile = core.Profile()
         feature = ( core.Call.Features.LONG_DISTANCE
                     | core.Call.Features.DEST_LANDLINE )
-        call = core.Call( feature, 1 )
+        call = core.Call( feature, core.Duration( 1 ) )
 
         profile.add_call( call )
         profile.add_call( call )
@@ -19,7 +19,7 @@ class TestProfile( unittest.TestCase ):
         profile = core.Profile()
         feature = ( core.Call.Features.LONG_DISTANCE
                     | core.Call.Features.DEST_MOBILE )
-        call = core.Call( feature, 2 )
+        call = core.Call( feature, core.Duration( 2 ) )
 
         profile.add_call( call )
         profile.add_call( call )
@@ -29,7 +29,7 @@ class TestProfile( unittest.TestCase ):
         profile = core.Profile()
         feature = ( core.Call.Features.LOCAL
                     | core.Call.Features.DEST_LANDLINE )
-        call = core.Call( feature, 3 )
+        call = core.Call( feature, core.Duration( 3 ) )
 
         profile.add_call( call )
         profile.add_call( call )
@@ -39,7 +39,7 @@ class TestProfile( unittest.TestCase ):
         profile = core.Profile()
         feature = ( core.Call.Features.LOCAL
                     | core.Call.Features.DEST_MOBILE )
-        call = core.Call( feature, 4 )
+        call = core.Call( feature, core.Duration( 4 ) )
 
         profile.add_call( call )
         profile.add_call( call )
