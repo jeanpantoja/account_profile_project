@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import enum
+import re
 
 class Profile( object ):
 
@@ -130,6 +131,8 @@ class Call( object ):
 
 class Duration( object ):
     SECONDS_BY_MINUTE = 60
+    REGEX = r'(\d+)m(\d+)s'
+    FORMAT = "%dm%ds"
 
     def __init__( self, minutes = 0, seconds = 0 ):
         """
@@ -164,7 +167,18 @@ class Duration( object ):
             Exception if the duration string is not valid
         """
 
-        return Duration()
+        match = re.match( Duration.REGEX, duration )
+
+        if match:
+            groups = match.groups()
+            minutes = int( groups[ 0 ] )
+            seconds = int( groups[ 1 ] )
+            return Duration( minutes, seconds )
+
+        msg = ( "The duration[%s] is not int the format[%s]"
+                % ( duration, Duration.FORMAT ) )
+
+        raise Exception( msg )
 
     @staticmethod
     def _calculate_seconds( minutes, seconds ):
