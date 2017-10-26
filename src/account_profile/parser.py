@@ -17,6 +17,7 @@ class BillLine( object ):
     CSV_SERVICE_TYPE_COLUMN = 6
     CSV_DESTINY_CONLUMN = 10
     CSV_DURATION_COLUMN = 13
+    CSV_N_COLUMNS = 20
 
     def __init__( self,
                   phone_number = "",
@@ -165,6 +166,14 @@ class BillLine( object ):
         Args:
             csv_line( list ): A list with the line values of csv file
         """
+        n_cols = len( csv_line )
+
+        if n_cols != BillLine.CSV_N_COLUMNS:
+            raise Exception(
+                "The csv file must have %d columns, this file have %d"
+                % ( BillLine.CSV_N_COLUMNS, n_cols )
+            )
+
         bline = BillLine(
             csv_line[ BillLine.CSV_PHONE_NUMBER_COLUMN ],
             csv_line[ BillLine.CSV_SERVICE_TYPE_COLUMN ],
