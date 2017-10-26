@@ -231,5 +231,10 @@ class BillParser( object ):
             informations relative to phone_number
         """
         if phone_number in self.phone_by_lines:
-            return self.phone_by_lines[ phone_number ]
-        return None
+            lines = self.phone_by_lines[ phone_number ]
+            profile = BillLine.mount_profile( lines )
+            return profile
+
+        raise Exception(
+            "No profile was founded to the number[%s]" % ( phone_number )
+        )
