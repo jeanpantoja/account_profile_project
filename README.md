@@ -3,8 +3,9 @@
 # Dependency:
     * Make
     * python3
+    * zip
 
-# Usage:
+# Usage( Linux ):
     * git clone git@github.com:jeanpantoja/account_profile_project.git
     * cd account_profile_project
     * make
