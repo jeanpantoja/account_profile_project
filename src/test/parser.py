@@ -11,7 +11,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "TIM Torpedo",
             "Destino" : "SC FIXO - AREA 48",
-            "Duração" : ""
+            "Duração" : "",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -21,7 +22,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "Serviços de SMS",
             "Destino" : "TIM Agenda - Backup",
-            "Duração" : "-"
+            "Duração" : "-",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -31,7 +33,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "TIM Wap Fast",
             "Destino" : "-",
-            "Duração" : " 6,200 KB"
+            "Duração" : " 6,200 KB",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -40,7 +43,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "TIM Connect Fast",
             "Destino" : "-",
-            "Duração" : "200,220 KB"
+            "Duração" : "200,220 KB",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -49,7 +53,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "BlackBerry Professional - MB",
             "Destino" : "-",
-            "Duração" : "730 B"
+            "Duração" : "730 B",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -59,7 +64,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "Chamadas Locais para Celulares TIM",
             "Destino" : "SC MOVEL TIM - AREA 48",
-            "Duração" : "01m06s"
+            "Duração" : "01m06s",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -73,7 +79,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "Chamadas Locais para Telefones Fixos",
             "Destino" : "SC FIXO - AREA 48",
-            "Duração" : "01m06s"
+            "Duração" : "01m06s",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -87,7 +94,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "Chamadas Longa Distância: TIM LD 41",
             "Destino" : "SC MOVEL TIM - AREA 48",
-            "Duração" : "01m06s"
+            "Duração" : "01m06s",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -101,7 +109,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "Chamadas Longa Distância: TIM LD 41",
             "Destino" : "SP FIXO - AREA 11",
-            "Duração" : "01m06s"
+            "Duração" : "01m06s",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -131,7 +140,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "Chamadas Longa Distância: TIM LD 41",
             "Destino" : "SP FIXO - AREA 11",
-            "Duração" : "01m06s"
+            "Duração" : "01m06s",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
@@ -142,7 +152,8 @@ class TestBillLine( unittest.TestCase ):
         line = {
             "Tpserv" : "TIM torpedo",
             "Destino" : "SP MOVEL - AREA 11",
-            "Duração" : ""
+            "Duração" : "",
+            "NumAcs" : "111-1111-1111"
         }
 
         bline = parser.BillLine( line )
