@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import account_profile.core as core
+import csv
 
 class BillLine( object ):
     SMS_REGEX = r'TIM\s*Torpedo|Serviços\s*de\s*SMS'
@@ -9,6 +10,13 @@ class BillLine( object ):
     LOCAL_CALL_REGEX = r'Chamadas\s*Locais'
     DEST_CALL_MOBILE_REGEX = r'Movel|Celulares'
     DEST_CALL_LANDLINE_REGEX = r'Fixo'
+    PHONE_NUMBER_REGEX = r'\d{3}-\d{4,5}-\d{4}'
+
+    CSV_COLUMN_DELIMITER = ";"
+    CSV_PHONE_NUMBER_COLUMN = 3
+    CSV_SERVICE_TYPE_COLUMN = 6
+    CSV_DESTINY_CONLUMN = 10
+    CSV_DURATION_COLUMN = 13
 
     def __init__( self,
                   phone_number = "",
@@ -133,6 +141,32 @@ class BillLine( object ):
             return core.Duration.from_string( self.duration )
 
         return None
+
+    @staticmethod
+    def _load_phone_numbers_bill_lines( bill_file_name ):
+        file_handler = open( bill_file_name )
+        csv_reader = csv.reader( file_handler, delimiter = BillLine.CSV_COLUMN_DELIMITER  )
+        phone_number_by_bill_lines = dict()
+
+        for csv_line in csv_reader:
+            bline = BillLine()
+
+            bline.phone_number = csv_line[ BillLine.CSV_PHONE_NUMBER_COLUMN ]
+            bline.service_type = csv_line[ BillLine.CSV_SERVICE_TYPE_COLUMN ]
+            bline.destiny = csv_line[ BillLine.CSV_DESTINY_CONLUMN ]
+            bline.duration = csv_line[ BillLine.CSV_DURATION_COLUMN ]
+
+            bline.phone_number = bline.phone_number.strip()
+
+            if re.match( BillLine.PHONE_NUMBER_REGEX, bline.phone_number ):
+                if not bline.phone_number in phone_number_by_bill_lines:
+                    phone_number_by_bill_lines[ bline.phone_number ] = list()
+
+                phone_number_lines = phone_number_by_bill_lines[ bline.phone_number ]
+                phone_number_lines.append( bline )
+
+        file_handler.close()
+        return phone_number_by_bill_lines
 
 class BillParser( object ):
 
