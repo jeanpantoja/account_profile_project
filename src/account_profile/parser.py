@@ -158,24 +158,35 @@ class BillLine( object ):
         )
 
         return bline
+    @staticmethod
+    def is_valid_phone_number( bline ):
+        """
+        Args:
+            bline( account_profile.parser.BillLine ): An instance to verify
+            the phone number format
+
+        Returns:
+            bool
+        """
+        match = re.match( BillLine.PHONE_NUMBER_REGEX, bline.phone_number )
+        return bool( match )
 
     @staticmethod
     def load( bill_file_name ):
         file_handler = open( bill_file_name )
         csv_reader = csv.reader( file_handler, delimiter = BillLine.CSV_COLUMN_DELIMITER  )
-        phone_number_by_bill_lines = dict()
 
-        for csv_line in csv_reader:
-            bline = BillLine.from_csv_line( csv_line )
-
-            if re.match( BillLine.PHONE_NUMBER_REGEX, bline.phone_number ):
-                if not bline.phone_number in phone_number_by_bill_lines:
-                    phone_number_by_bill_lines[ bline.phone_number ] = list()
-
-                phone_number_lines = phone_number_by_bill_lines[ bline.phone_number ]
-                phone_number_lines.append( bline )
-
+        bill_lines = [ BillLine.from_csv_line( csv_line ) for csv_line in csv_reader ]
         file_handler.close()
+
+        phone_number_by_bill_lines = dict()
+        for bline in filter( BillLine.is_valid_phone_number, bill_lines ):
+            if not bline.phone_number in phone_number_by_bill_lines:
+                phone_number_by_bill_lines[ bline.phone_number ] = list()
+
+            phone_number_lines = phone_number_by_bill_lines[ bline.phone_number ]
+            phone_number_lines.append( bline )
+
         return phone_number_by_bill_lines
 
     @staticmethod
