@@ -18,6 +18,7 @@ class BillLine( object ):
 
         self.service_type = bill_line[ "Tpserv" ]
         self.destiny = bill_line[ "Destino" ]
+        self.duration = bill_line[ "Duração" ]
 
     def is_SMS( self ):
         """

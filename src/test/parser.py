@@ -10,7 +10,8 @@ class TestBillLine( unittest.TestCase ):
     def test_is_SMS( self ):
         line = {
             "Tpserv" : "TIM Torpedo",
-            "Destino" : "SC FIXO - AREA 48"
+            "Destino" : "SC FIXO - AREA 48",
+            "Duração" : ""
         }
 
         bline = parser.BillLine( line )
@@ -19,7 +20,8 @@ class TestBillLine( unittest.TestCase ):
     def test_is_SMS_service( self ):
         line = {
             "Tpserv" : "Serviços de SMS",
-            "Destino" : "TIM Agenda - Backup"
+            "Destino" : "TIM Agenda - Backup",
+            "Duração" : "-"
         }
 
         bline = parser.BillLine( line )
@@ -28,7 +30,8 @@ class TestBillLine( unittest.TestCase ):
     def test_is_internet( self ):
         line = {
             "Tpserv" : "TIM Wap Fast",
-            "Destino" : "-"
+            "Destino" : "-",
+            "Duração" : " 6,200 KB"
         }
 
         bline = parser.BillLine( line )
@@ -36,7 +39,8 @@ class TestBillLine( unittest.TestCase ):
 
         line = {
             "Tpserv" : "TIM Connect Fast",
-            "Destino" : "-"
+            "Destino" : "-",
+            "Duração" : "200,220 KB"
         }
 
         bline = parser.BillLine( line )
@@ -44,7 +48,8 @@ class TestBillLine( unittest.TestCase ):
 
         line = {
             "Tpserv" : "BlackBerry Professional - MB",
-            "Destino" : "-"
+            "Destino" : "-",
+            "Duração" : "730 B"
         }
 
         bline = parser.BillLine( line )
@@ -53,7 +58,8 @@ class TestBillLine( unittest.TestCase ):
     def test_features_from_local_call_to_mobile( self ):
         line = {
             "Tpserv" : "Chamadas Locais para Celulares TIM",
-            "Destino" : "SC MOVEL TIM - AREA 48"
+            "Destino" : "SC MOVEL TIM - AREA 48",
+            "Duração" : "01m06s"
         }
 
         bline = parser.BillLine( line )
@@ -66,7 +72,8 @@ class TestBillLine( unittest.TestCase ):
     def test_features_from_local_call_to_landline( self ):
         line = {
             "Tpserv" : "Chamadas Locais para Telefones Fixos",
-            "Destino" : "SC FIXO - AREA 48"
+            "Destino" : "SC FIXO - AREA 48",
+            "Duração" : "01m06s"
         }
 
         bline = parser.BillLine( line )
@@ -79,7 +86,8 @@ class TestBillLine( unittest.TestCase ):
     def test_features_from_long_distance_call_to_mobile( self ):
         line = {
             "Tpserv" : "Chamadas Longa Distância: TIM LD 41",
-            "Destino" : "SC MOVEL TIM - AREA 48"
+            "Destino" : "SC MOVEL TIM - AREA 48",
+            "Duração" : "01m06s"
         }
 
         bline = parser.BillLine( line )
@@ -92,7 +100,8 @@ class TestBillLine( unittest.TestCase ):
     def test_features_from_long_distance_call_to_landline( self ):
         line = {
             "Tpserv" : "Chamadas Longa Distância: TIM LD 41",
-            "Destino" : "SP FIXO - AREA 11"
+            "Destino" : "SP FIXO - AREA 11",
+            "Duração" : "01m06s"
         }
 
         bline = parser.BillLine( line )
