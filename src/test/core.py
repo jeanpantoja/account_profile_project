@@ -121,7 +121,7 @@ class TestDuration( unittest.TestCase ):
 
         self.assertAlmostEqual( duration_03.to_minutes(), 5.5  )
 
-class TestDitalDataSize( unittest.TestCase ):
+class TestDigitalDataSize( unittest.TestCase ):
 
     def test_create_data_in_B_01( self ):
         datasize = core.DigitalDataSize( "10 B" )
@@ -165,4 +165,14 @@ class TestDitalDataSize( unittest.TestCase ):
             datasize = core.DigitalDataSize( "10.1" )
 
         with self.assertRaises( Exception ):
+
             datasize = core.DigitalDataSize( "10,1" )
+
+    def test_addition( self ):
+        d01 = core.DigitalDataSize( "1 B" )
+        d02 = core.DigitalDataSize( "2 B" )
+
+        result = d01 + d02
+        expected = core.DigitalDataSize( "3 B" )
+
+        self.assertAlmostEqual( result.get_number_of_bytes(), expected.get_number_of_bytes() )

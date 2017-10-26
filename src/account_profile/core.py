@@ -7,7 +7,7 @@ class Profile( object ):
 
     def __init__( self ):
         self.calls = []
-        self.internet_usage = 0
+        self.internet_usage = DigitalDataSize()
         self.sms_usage = 0
 
     def add_call( self, call ):
@@ -70,17 +70,16 @@ class Profile( object ):
     def add_internet( self, ddsize ):
         """
         Args:
-            ddsize( account_profile.core.DigitalDataSize ): The number of bytes
-            to increase the internet usage counter
+            ddsize( account_profile.core.DigitalDataSize ): Increase the internet usage
         """
-        self.internet_usage = self.internet_usage + ddsize.get_number_of_bytes()
+        self.internet_usage = self.internet_usage + ddsize
 
     def get_internet_usage( self ):
         """
         Returns:
             An integer value representing the number of bytes
         """
-        return self.internet_usage
+        return self.internet_usage.get_number_of_bytes()
 
 class Duration( object ):
     SECONDS_BY_MINUTE = 60
@@ -219,7 +218,7 @@ class DigitalDataSize( object ):
     KILO_BYTE = 1024 * BYTE
     MEGA_BYTE = 1024 * KILO_BYTE
 
-    def __init__( self, measure ):
+    def __init__( self, measure = "0 B" ):
         """
         Args:
             measure( str ): Ditital data size in formats:
@@ -245,6 +244,11 @@ class DigitalDataSize( object ):
             raise Exception(
                 "Can not convert the text[%s] to DigitalDataSize" % ( measure )
             )
+
+    def __add__( self, other ):
+        result = DigitalDataSize()
+        result.n_bytes = self.n_bytes + other.n_bytes
+        return result
 
     def get_number_of_bytes( self ):
         return self.n_bytes
