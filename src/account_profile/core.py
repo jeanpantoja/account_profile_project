@@ -208,3 +208,86 @@ class Call( object ):
             duration = duration + call.duration
 
         return duration.to_minutes()
+
+class DigitalDataSize( object ):
+    BYTE_REGEX = r'((\d+)(,\d+){0,1})\s*B$'
+    KILO_BYTE_REGEX = r'((\d+)(,\d+){0,1})\s*KB$'
+    MEGA_BYTE_REGEX = r'((\d+)(,\d+){0,1})\s*MB$'
+
+    BYTE = 1
+    KILO_BYTE = 1024 * BYTE
+    MEGA_BYTE = 1024 * KILO_BYTE
+
+    def __init__( self, measure ):
+        """
+        Args:
+            measure( str ): Ditital data size in formats:
+                "%d B"
+                "%d,%d B"
+                "%d KB"
+                "%d,%d KB"
+                "%d MB"
+                "%d,%d MB"
+        """
+
+        self.n_bytes = None
+
+        if self._is_in_bytes( measure ):
+            self._read_as_bytes( measure )
+
+        elif self._is_in_kilo_bytes( measure ):
+            self._read_as_kilo_bytes( measure )
+
+        elif self._is_in_mega_bytes( measure ):
+            self._read_as_mega_bytes( measure )
+        else:
+            raise Exception(
+                "Can not convert the text[%s] to DigitalDataSize" % ( measure )
+            )
+
+    def get_number_of_bytes( self ):
+        return self.n_bytes
+
+    def _read_as( self, measure, regex, multiplier ):
+        measure = measure.strip()
+        match = re.match( regex, measure )
+
+        if match:
+            groups = match.groups()
+            numerical_part = groups[ 0 ]
+
+            numerical_part = numerical_part.replace( ",", "." )
+            self.n_bytes = multiplier( float( numerical_part ) )
+
+    def _read_as_bytes( self, measure ):
+        return self._read_as(
+            measure,
+            self.BYTE_REGEX,
+            lambda x : x * self.BYTE
+        )
+
+    def _read_as_kilo_bytes( self, measure ):
+        return self._read_as(
+            measure,
+            self.KILO_BYTE_REGEX,
+            lambda x : x * self.KILO_BYTE
+        )
+
+    def _read_as_mega_bytes( self, measure ):
+        return self._read_as(
+            measure,
+            self.MEGA_BYTE_REGEX,
+            lambda x : x * self.MEGA_BYTE
+        )
+
+    @staticmethod
+    def _is_in_bytes( measure ):
+        return bool( re.match( DigitalDataSize.BYTE_REGEX, measure ) )
+
+    @staticmethod
+    def _is_in_kilo_bytes( measure ):
+        return bool( re.match( DigitalDataSize.KILO_BYTE_REGEX, measure ) )
+
+    @staticmethod
+    def _is_in_mega_bytes( measure ):
+        return bool( re.match( DigitalDataSize.MEGA_BYTE_REGEX, measure ) )

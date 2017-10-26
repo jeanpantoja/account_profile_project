@@ -120,3 +120,49 @@ class TestDuration( unittest.TestCase ):
         duration_03 = duration_01 + duration_02
 
         self.assertAlmostEqual( duration_03.to_minutes(), 5.5  )
+
+class TestDitalDataSize( unittest.TestCase ):
+
+    def test_create_data_in_B_01( self ):
+        datasize = core.DigitalDataSize( "10 B" )
+        self.assertAlmostEqual( 10.0, datasize.get_number_of_bytes() )
+
+    def test_create_data_in_B_02( self ):
+        datasize = core.DigitalDataSize( "10,1 B" )
+        self.assertAlmostEqual( 10.1, datasize.get_number_of_bytes() )
+
+    def test_create_data_in_KB_01( self ):
+        datasize = core.DigitalDataSize( "10 KB" )
+        self.assertAlmostEqual( 10.0 * 1024, datasize.get_number_of_bytes() )
+
+    def test_create_data_in_KB_02( self ):
+        datasize = core.DigitalDataSize( "10,1 KB" )
+        self.assertAlmostEqual( 10.1 * 1024, datasize.get_number_of_bytes() )
+
+
+    def test_create_data_in_MB_01( self ):
+        datasize = core.DigitalDataSize( "10 MB" )
+        self.assertAlmostEqual( 10.0 * 1024 * 1024, datasize.get_number_of_bytes() )
+
+    def test_create_data_in_MB_02( self ):
+        datasize = core.DigitalDataSize( "10,1 MB" )
+        self.assertAlmostEqual( 10.1 * 1024 * 1024, datasize.get_number_of_bytes() )
+
+    def test_invalid_creation( self ):
+        with self.assertRaises( Exception ):
+            datasize = core.DigitalDataSize( "10,1 BB" )
+
+        with self.assertRaises( Exception ):
+            datasize = core.DigitalDataSize( "10,1 KBB" )
+
+        with self.assertRaises( Exception ):
+            datasize = core.DigitalDataSize( "10,1 MBB" )
+
+        with self.assertRaises( Exception ):
+            datasize = core.DigitalDataSize( "10.1 K" )
+
+        with self.assertRaises( Exception ):
+            datasize = core.DigitalDataSize( "10.1" )
+
+        with self.assertRaises( Exception ):
+            datasize = core.DigitalDataSize( "10,1" )
