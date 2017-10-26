@@ -144,6 +144,21 @@ class BillLine( object ):
 
         raise Exception( "Fail attemp to read duration as call duration" )
 
+    def retrieve_internet_usage( self ):
+        """
+            Returns:
+                An instance of account_profile.core.DigitalDataSize representing the
+                internet usage.
+
+            Raises:
+                 If this bill line is not from a call it raise Exception
+        """
+
+        if self.is_internet():
+            return core.DigitalDataSize( self.duration )
+
+        raise Exception( "Fail attemp to read duration as call internet usage" )
+
     @staticmethod
     def from_csv_line( csv_line ):
         """
@@ -206,30 +221,13 @@ class BillLine( object ):
                 features = line.retrieve_call_features()
                 call = core.Call( features, duration )
                 profile.add_call( call )
+
             elif line.is_SMS():
                 profile.add_SMS( 1 )
+
             elif line.is_internet():
-                duration_str = line.duration
-                duration_str = duration_str.replace( ",", "." )
-                duration_str = duration_str.strip()
-                duration = 0
-
-                match = re.match(  r'((\d+)(\.\d+){0,1})\s*B', duration_str )
-                if match:
-                    groups = match.groups()
-                    duration = float( groups[ 0 ] )
-
-                match = re.match(  r'((\d+)(\.\d+){0,1})\s*KB', duration_str )
-                if match:
-                    groups = match.groups()
-                    duration = float( groups[ 0 ] ) * 1024
-
-                match = re.match(  r'((\d+)(\.\d+){0,1})\s*MB', duration_str )
-                if match:
-                    groups = match.groups()
-                    duration = float( groups[ 0 ] ) * 1024 * 1024
-
-                profile.add_internet( duration )
+                ditital_data_size = line.retrieve_internet_usage()
+                profile.add_internet( ditital_data_size )
 
         return profile
 

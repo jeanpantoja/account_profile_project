@@ -55,8 +55,8 @@ class TestProfile( unittest.TestCase ):
     def test_adding_internet( self ):
         profile = core.Profile()
 
-        profile.add_internet( 1 )
-        profile.add_internet( 2 )
+        profile.add_internet( core.DigitalDataSize( "1 B" ) )
+        profile.add_internet( core.DigitalDataSize( "2 B" ) )
         self.assertEqual( profile.get_internet_usage(), 3 )
 
 class TestCall( unittest.TestCase ):

@@ -67,12 +67,13 @@ class Profile( object ):
         """
         return self.sms_usage
 
-    def add_internet( self, n_bytes ):
+    def add_internet( self, ddsize ):
         """
         Args:
-            n_bytes( int ): The number of bytes to increase the internet usage counter
+            ddsize( account_profile.core.DigitalDataSize ): The number of bytes
+            to increase the internet usage counter
         """
-        self.internet_usage = self.internet_usage + n_bytes
+        self.internet_usage = self.internet_usage + ddsize.get_number_of_bytes()
 
     def get_internet_usage( self ):
         """
