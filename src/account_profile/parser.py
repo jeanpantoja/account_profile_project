@@ -143,7 +143,7 @@ class BillLine( object ):
         return None
 
     @staticmethod
-    def _load_phone_numbers_bill_lines( bill_file_name ):
+    def load( bill_file_name ):
         file_handler = open( bill_file_name )
         csv_reader = csv.reader( file_handler, delimiter = BillLine.CSV_COLUMN_DELIMITER  )
         phone_number_by_bill_lines = dict()
@@ -213,4 +213,23 @@ class BillLine( object ):
         return profile
 
 class BillParser( object ):
-    pass
+
+    def __init__( self, file_name ):
+        """
+        Args:
+            file_name( str ): The file name of the bill to be parsed
+        """
+        self.phone_by_lines = BillLine.load( file_name )
+
+    def retrieve_phone_profile( self, phone_number ):
+        """
+        Args:
+            phone_number( str ): The phone number to recover the profile from bill parsed
+
+        Returns:
+            An instance of account_profile.core.Profile with
+            informations relative to phone_number
+        """
+        if phone_number in self.phone_by_lines:
+            return self.phone_by_lines[ phone_number ]
+        return None
