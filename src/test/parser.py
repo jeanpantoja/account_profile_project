@@ -187,8 +187,7 @@ class TestBillLine( unittest.TestCase ):
 class TestBillParser( unittest.TestCase ):
 
     def test_mount_profile( self ):
-        bparser = parser.BillParser()
-        profile = bparser.mount_profile( constants.BILL_LINES_01 )
+        profile = parser.BillLine.mount_profile( constants.BILL_LINES_01 )
 
         self.assertAlmostEqual(
             profile.get_local_mobile_call_usage(),

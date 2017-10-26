@@ -168,9 +168,8 @@ class BillLine( object ):
         file_handler.close()
         return phone_number_by_bill_lines
 
-class BillParser( object ):
-
-    def mount_profile( self, bill_lines ):
+    @staticmethod
+    def mount_profile( bill_lines ):
         """
         Args:
             bill_lines( list ): A list with account_profile.parser.BillLine instances
@@ -212,3 +211,6 @@ class BillParser( object ):
                 profile.add_internet( duration )
 
         return profile
+
+class BillParser( object ):
+    pass
