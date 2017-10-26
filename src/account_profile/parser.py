@@ -10,16 +10,20 @@ class BillLine( object ):
     DEST_CALL_MOBILE_REGEX = r'Movel|Celulares'
     DEST_CALL_LANDLINE_REGEX = r'Fixo'
 
-    def __init__( self, bill_line ):
+    def __init__( self,
+                  phone_number = "",
+                  service_type = "",
+                  destiny = "",
+                  duration = "" ):
         """
         Args:
             bill_line( dict ): A dict with all fields from a bill line
         """
 
-        self.service_type = bill_line[ "Tpserv" ]
-        self.destiny = bill_line[ "Destino" ]
-        self.duration = bill_line[ "Duração" ]
-        self.phone_number = bill_line[ "NumAcs" ]
+        self.phone_number = phone_number
+        self.service_type = service_type
+        self.destiny = destiny
+        self.duration = duration
 
     def is_SMS( self ):
         """
