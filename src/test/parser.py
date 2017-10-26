@@ -183,3 +183,39 @@ class TestBillLine( unittest.TestCase ):
         for bline in lines:
             msg = "[%s/%s] is not valid" % ( bline.service_type, bline.destiny )
             self.assertEqual( True, assertion( bline ), msg = msg )
+
+class TestBillParser( unittest.TestCase ):
+
+    def test_mount_profile( self ):
+        bparser = parser.BillParser()
+        profile = bparser.mount_profile( constants.BILL_LINES_01 )
+
+        self.assertAlmostEqual(
+            profile.get_local_mobile_call_usage(),
+            ( 2 * 66 ) / 60.0
+        )
+
+        self.assertAlmostEqual(
+            profile.get_local_landline_call_usage(),
+            66 / 60.0
+        )
+
+        self.assertAlmostEqual(
+            profile.get_long_distance_mobile_call_usage(),
+            ( 90 + 85 ) / 60.0
+        )
+
+        self.assertAlmostEqual(
+            profile.get_long_distance_landline_call_usage(),
+            ( 65 + 45 ) / 60.0
+        )
+
+        self.assertEqual( profile.get_SMS_usage(), 2 )
+
+        self.assertAlmostEqual(
+            profile.get_internet_usage(),
+            18.67969 * ( 2**10 )
+            + 1.95332 * ( 2 ** 20 )
+            + 5.64551 * ( 2 ** 10 )
+            + 527
+        )

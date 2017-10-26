@@ -133,3 +133,48 @@ class BillLine( object ):
             return core.Duration.from_string( self.duration )
 
         return None
+
+class BillParser( object ):
+
+    def mount_profile( self, bill_lines ):
+        """
+        Args:
+            bill_lines( list ): A list with account_profile.parser.BillLine instances
+
+        Returns:
+            An account_profile.core.Profile instance
+        """
+        profile = core.Profile()
+
+        for line in bill_lines:
+            if line.is_call():
+                duration = line.retrieve_call_duration()
+                features = line.retrieve_call_features()
+                call = core.Call( features, duration )
+                profile.add_call( call )
+            elif line.is_SMS():
+                profile.add_SMS( 1 )
+            elif line.is_internet():
+                duration_str = line.duration
+                duration_str = duration_str.replace( ",", "." )
+                duration_str = duration_str.strip()
+                duration = 0
+
+                match = re.match(  r'((\d+)(\.\d+){0,1})\s*B', duration_str )
+                if match:
+                    groups = match.groups()
+                    duration = float( groups[ 0 ] )
+
+                match = re.match(  r'((\d+)(\.\d+){0,1})\s*KB', duration_str )
+                if match:
+                    groups = match.groups()
+                    duration = float( groups[ 0 ] ) * 1024
+
+                match = re.match(  r'((\d+)(\.\d+){0,1})\s*MB', duration_str )
+                if match:
+                    groups = match.groups()
+                    duration = float( groups[ 0 ] ) * 1024 * 1024
+
+                profile.add_internet( duration )
+
+        return profile
