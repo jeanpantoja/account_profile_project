@@ -133,14 +133,16 @@ class BillLine( object ):
         """
             Returns:
                 An instance of account_profile.core.Duration representing the
-                duration of this call. If this bill line is not from a call
-                None is returned
+                duration of this call.
+
+            Raises:
+                 If this bill line is not from a call it raise Exception
         """
 
         if self.is_call():
             return core.Duration.from_string( self.duration )
 
-        return None
+        raise Exception( "Fail attemp to read duration as call duration" )
 
     @staticmethod
     def load( bill_file_name ):

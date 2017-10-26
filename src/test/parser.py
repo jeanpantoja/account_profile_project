@@ -175,9 +175,8 @@ class TestBillLine( unittest.TestCase ):
             "SP MOVEL - AREA 11",
             ""
         )
-
-        duration = bline.retrieve_call_duration()
-        self.assertEqual( duration, None )
+        with self.assertRaises( Exception ):
+            bline.retrieve_call_duration()
 
     def _test_calls( self, assertion, lines ):
         for bline in lines:
