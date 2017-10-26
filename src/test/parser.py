@@ -127,6 +127,28 @@ class TestBillLine( unittest.TestCase ):
         self._test_calls( parser.BillLine.is_local_call,
                           constants.BILL_LINES_OF_LOCAL_CALL )
 
+    def test_retrieve_call_duration( self ):
+        line = {
+            "Tpserv" : "Chamadas Longa Distância: TIM LD 41",
+            "Destino" : "SP FIXO - AREA 11",
+            "Duração" : "01m06s"
+        }
+
+        bline = parser.BillLine( line )
+        duration = bline.retrieve_call_duration()
+        self.assertEqual( duration.to_seconds(), 66 )
+
+    def test_retrieve_call_duration_from_not_call( self ):
+        line = {
+            "Tpserv" : "TIM torpedo",
+            "Destino" : "SP MOVEL - AREA 11",
+            "Duração" : ""
+        }
+
+        bline = parser.BillLine( line )
+        duration = bline.retrieve_call_duration()
+        self.assertEqual( duration, None )
+
     def _test_calls( self, assertion, lines ):
         for line in lines:
             bline = parser.BillLine( line )

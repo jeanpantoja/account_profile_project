@@ -115,3 +115,16 @@ class BillLine( object ):
 
     def is_call( self ):
         return self.is_local_call() or self.is_long_distance_call()
+
+    def retrieve_call_duration( self ):
+        """
+            Returns:
+                An instance of account_profile.core.Duration representing the
+                duration of this call. If this bill line is not from a call
+                None is returned
+        """
+
+        if self.is_call():
+            return core.Duration.from_string( self.duration )
+
+        return None
