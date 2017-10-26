@@ -50,7 +50,7 @@ class Program( object ):
                 },
                 "Long Distance" : {
                     "mobile" : "%f minutes" % ( profile.get_long_distance_mobile_call_usage() ),
-                    "landline" : "%f minutes" % ( profile.get_local_landline_call_usage() )
+                    "landline" : "%f minutes" % ( profile.get_long_distance_landline_call_usage() )
                 },
             },
             "SMS":"%d und" % ( profile.get_SMS_usage() ),
