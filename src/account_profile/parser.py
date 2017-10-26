@@ -28,7 +28,7 @@ class BillLine( object ):
             bill_line( dict ): A dict with all fields from a bill line
         """
 
-        self.phone_number = phone_number
+        self.phone_number = phone_number.strip()
         self.service_type = service_type
         self.destiny = destiny
         self.duration = duration
@@ -145,20 +145,28 @@ class BillLine( object ):
         raise Exception( "Fail attemp to read duration as call duration" )
 
     @staticmethod
+    def from_csv_line( csv_line ):
+        """
+        Args:
+            csv_line( list ): A list with the line values of csv file
+        """
+        bline = BillLine(
+            csv_line[ BillLine.CSV_PHONE_NUMBER_COLUMN ],
+            csv_line[ BillLine.CSV_SERVICE_TYPE_COLUMN ],
+            csv_line[ BillLine.CSV_DESTINY_CONLUMN ],
+            csv_line[ BillLine.CSV_DURATION_COLUMN ]
+        )
+
+        return bline
+
+    @staticmethod
     def load( bill_file_name ):
         file_handler = open( bill_file_name )
         csv_reader = csv.reader( file_handler, delimiter = BillLine.CSV_COLUMN_DELIMITER  )
         phone_number_by_bill_lines = dict()
 
         for csv_line in csv_reader:
-            bline = BillLine()
-
-            bline.phone_number = csv_line[ BillLine.CSV_PHONE_NUMBER_COLUMN ]
-            bline.service_type = csv_line[ BillLine.CSV_SERVICE_TYPE_COLUMN ]
-            bline.destiny = csv_line[ BillLine.CSV_DESTINY_CONLUMN ]
-            bline.duration = csv_line[ BillLine.CSV_DURATION_COLUMN ]
-
-            bline.phone_number = bline.phone_number.strip()
+            bline = BillLine.from_csv_line( csv_line )
 
             if re.match( BillLine.PHONE_NUMBER_REGEX, bline.phone_number ):
                 if not bline.phone_number in phone_number_by_bill_lines:
