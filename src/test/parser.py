@@ -16,15 +16,6 @@ class TestBillLine( unittest.TestCase ):
         )
         self.assertEqual( True, bline.is_SMS() )
 
-    def test_is_SMS_service( self ):
-        bline = parser.BillLine(
-            "111-1111-1111",
-            "Serviços de SMS",
-            "TIM Agenda - Backup",
-            "-"
-        )
-        self.assertEqual( True, bline.is_SMS() )
-
     def test_is_internet( self ):
         bline = parser.BillLine(
             "111-1111-1111",

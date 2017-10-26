@@ -4,7 +4,7 @@ import account_profile.core as core
 import csv
 
 class BillLine( object ):
-    SMS_REGEX = r'TIM\s*Torpedo|Serviços\s*de\s*SMS'
+    SMS_REGEX = r'TIM\s*Torpedo'
     INTERNET_REGEX = r'TIM\s*(Wap\s*Fast|Connect\s*Fast)|BlackBerry\s*Professional\s*-\s*MB'
     LONG_DISTANCE_CALL_REGEX = r'Chamadas\s*Longa\s*(Distância|Distancia)'
     LOCAL_CALL_REGEX = r'Chamadas\s*Locais'
