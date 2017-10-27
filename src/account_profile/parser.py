@@ -145,7 +145,7 @@ class BillLine( object ):
 
         raise Exception( "Fail attemp to read duration as call duration" )
 
-    def _retrieve_internet_usage( self ):
+    def _retrieve_internet_data_usage( self ):
         """
             Returns:
                 An instance of account_profile.core.DigitalDataSize representing the
@@ -238,7 +238,7 @@ class BillLine( object ):
 
         calls = [ bl._retrieve_call() for bl in bill_lines if bl.is_call() ]
         sms_units = [ BillLine.SMS_UNIT for bl in bill_lines if bl.is_SMS() ]
-        internet_data_units = [ bl._retrieve_internet_usage() for bl in bill_lines if bl.is_internet() ]
+        internet_data_units = [ bl._retrieve_internet_data_usage() for bl in bill_lines if bl.is_internet() ]
 
         for call in calls:
             profile.add_call( call )
