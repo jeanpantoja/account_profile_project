@@ -12,6 +12,8 @@ class BillLine( object ):
     DEST_CALL_LANDLINE_REGEX = r'Fixo'
     PHONE_NUMBER_REGEX = r'\d{3}-\d{4,5}-\d{4}'
 
+    SMS_UNIT = 1
+
     CSV_COLUMN_DELIMITER = ";"
     CSV_PHONE_NUMBER_COLUMN = 3
     CSV_SERVICE_TYPE_COLUMN = 6
@@ -233,14 +235,19 @@ class BillLine( object ):
             An account_profile.core.Profile instance
         """
         profile = core.Profile()
-        for line in filter( BillLine.is_call, bill_lines ):
-            profile.add_call( line._retrieve_call() )
 
-        for line in filter( BillLine.is_SMS, bill_lines ):
-            profile.add_SMS( 1 )
+        calls = [ bl._retrieve_call() for bl in bill_lines if bl.is_call() ]
+        sms_units = [ BillLine.SMS_UNIT for bl in bill_lines if bl.is_SMS() ]
+        internet_data_units = [ bl._retrieve_internet_usage() for bl in bill_lines if bl.is_internet() ]
 
-        for line in filter( BillLine.is_internet, bill_lines ):
-            profile.add_internet( line._retrieve_internet_usage() )
+        for call in calls:
+            profile.add_call( call )
+
+        for sms_unit in sms_units:
+            profile.add_SMS( sms_unit )
+
+        for data_units in internet_data_units:
+            profile.add_internet( data_units )
 
         return profile
 
