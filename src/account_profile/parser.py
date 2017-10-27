@@ -143,7 +143,7 @@ class BillLine( object ):
 
         raise Exception( "Fail attemp to read duration as call duration" )
 
-    def retrieve_internet_usage( self ):
+    def _retrieve_internet_usage( self ):
         """
             Returns:
                 An instance of account_profile.core.DigitalDataSize representing the
@@ -211,6 +211,16 @@ class BillLine( object ):
 
         return phone_number_by_bill_lines
 
+    def _retrieve_call( self ):
+        if self.is_call():
+            duration = self.retrieve_call_duration()
+            features = self.retrieve_call_features()
+            return core.Call( features, duration )
+
+        raise Exception(
+            "Fail attemp to retrieve a call from a bill line of other service type"
+        )
+
     @staticmethod
     def mount_profile( bill_lines ):
         """
@@ -224,17 +234,13 @@ class BillLine( object ):
 
         for line in bill_lines:
             if line.is_call():
-                duration = line.retrieve_call_duration()
-                features = line.retrieve_call_features()
-                call = core.Call( features, duration )
-                profile.add_call( call )
+                profile.add_call( line._retrieve_call() )
 
             elif line.is_SMS():
                 profile.add_SMS( 1 )
 
             elif line.is_internet():
-                ditital_data_size = line.retrieve_internet_usage()
-                profile.add_internet( ditital_data_size )
+                profile.add_internet( line._retrieve_internet_usage() )
 
         return profile
 
