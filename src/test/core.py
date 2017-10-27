@@ -55,8 +55,8 @@ class TestProfile( unittest.TestCase ):
     def test_adding_internet( self ):
         profile = core.Profile()
 
-        profile.add_internet( core.DigitalDataSize( "1 B" ) )
-        profile.add_internet( core.DigitalDataSize( "2 B" ) )
+        profile.add_internet( core.DigitalDataSize( 1 ) )
+        profile.add_internet( core.DigitalDataSize( 2 ) )
         self.assertEqual( profile.get_internet_usage(), 3 )
 
 class TestCall( unittest.TestCase ):
@@ -124,55 +124,55 @@ class TestDuration( unittest.TestCase ):
 class TestDigitalDataSize( unittest.TestCase ):
 
     def test_create_data_in_B_01( self ):
-        datasize = core.DigitalDataSize( "10 B" )
+        datasize = core.DigitalDataSize.from_string( "10 B" )
         self.assertAlmostEqual( 10.0, datasize.get_number_of_bytes() )
 
     def test_create_data_in_B_02( self ):
-        datasize = core.DigitalDataSize( "10,1 B" )
+        datasize = core.DigitalDataSize.from_string( "10,1 B" )
         self.assertAlmostEqual( 10.1, datasize.get_number_of_bytes() )
 
     def test_create_data_in_KB_01( self ):
-        datasize = core.DigitalDataSize( "10 KB" )
+        datasize = core.DigitalDataSize.from_string( "10 KB" )
         self.assertAlmostEqual( 10.0 * 1024, datasize.get_number_of_bytes() )
 
     def test_create_data_in_KB_02( self ):
-        datasize = core.DigitalDataSize( "10,1 KB" )
+        datasize = core.DigitalDataSize.from_string( "10,1 KB" )
         self.assertAlmostEqual( 10.1 * 1024, datasize.get_number_of_bytes() )
 
 
     def test_create_data_in_MB_01( self ):
-        datasize = core.DigitalDataSize( "10 MB" )
+        datasize = core.DigitalDataSize.from_string( "10 MB" )
         self.assertAlmostEqual( 10.0 * 1024 * 1024, datasize.get_number_of_bytes() )
 
     def test_create_data_in_MB_02( self ):
-        datasize = core.DigitalDataSize( "10,1 MB" )
+        datasize = core.DigitalDataSize.from_string( "10,1 MB" )
         self.assertAlmostEqual( 10.1 * 1024 * 1024, datasize.get_number_of_bytes() )
 
     def test_invalid_creation( self ):
         with self.assertRaises( Exception ):
-            datasize = core.DigitalDataSize( "10,1 BB" )
+            datasize = core.DigitalDataSize.from_string( "10,1 BB" )
 
         with self.assertRaises( Exception ):
-            datasize = core.DigitalDataSize( "10,1 KBB" )
+            datasize = core.DigitalDataSize.from_string( "10,1 KBB" )
 
         with self.assertRaises( Exception ):
-            datasize = core.DigitalDataSize( "10,1 MBB" )
+            datasize = core.DigitalDataSize.from_string( "10,1 MBB" )
 
         with self.assertRaises( Exception ):
-            datasize = core.DigitalDataSize( "10.1 K" )
+            datasize = core.DigitalDataSize.from_string( "10.1 K" )
 
         with self.assertRaises( Exception ):
-            datasize = core.DigitalDataSize( "10.1" )
+            datasize = core.DigitalDataSize.from_string( "10.1" )
 
         with self.assertRaises( Exception ):
 
-            datasize = core.DigitalDataSize( "10,1" )
+            datasize = core.DigitalDataSize.from_string( "10,1" )
 
     def test_addition( self ):
-        d01 = core.DigitalDataSize( "1 B" )
-        d02 = core.DigitalDataSize( "2 B" )
+        d01 = core.DigitalDataSize.from_string( "1 B" )
+        d02 = core.DigitalDataSize.from_string( "2 B" )
 
         result = d01 + d02
-        expected = core.DigitalDataSize( "3 B" )
+        expected = core.DigitalDataSize.from_string( "3 B" )
 
         self.assertAlmostEqual( result.get_number_of_bytes(), expected.get_number_of_bytes() )

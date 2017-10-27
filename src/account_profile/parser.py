@@ -154,7 +154,7 @@ class BillLine( object ):
         """
 
         if self.is_internet():
-            return core.DigitalDataSize( self.duration )
+            return core.DigitalDataSize.from_string( self.duration )
 
         raise Exception(
             "Fail attemp to retrieve internet usage from a bill line of other service type"
