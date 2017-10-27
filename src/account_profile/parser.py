@@ -233,16 +233,14 @@ class BillLine( object ):
             An account_profile.core.Profile instance
         """
         profile = core.Profile()
+        for line in filter( BillLine.is_call, bill_lines ):
+            profile.add_call( line._retrieve_call() )
 
-        for line in bill_lines:
-            if line.is_call():
-                profile.add_call( line._retrieve_call() )
+        for line in filter( BillLine.is_SMS, bill_lines ):
+            profile.add_SMS( 1 )
 
-            elif line.is_SMS():
-                profile.add_SMS( 1 )
-
-            elif line.is_internet():
-                profile.add_internet( line._retrieve_internet_usage() )
+        for line in filter( BillLine.is_internet, bill_lines ):
+            profile.add_internet( line._retrieve_internet_usage() )
 
         return profile
 
