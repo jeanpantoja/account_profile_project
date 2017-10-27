@@ -236,7 +236,7 @@ class DigitalDataSize( object ):
                 "%d,%d MB"
         """
         converter = DigitalDataSize._Converter( measure )
-        return DigitalDataSize( converter.retrieve_length_in_bytes() )
+        return DigitalDataSize( converter.convert() )
 
     def __add__( self, other ):
         result = DigitalDataSize()
@@ -247,8 +247,30 @@ class DigitalDataSize( object ):
         return self.n_bytes
 
     """
-    Helper class to convert Ditital DigitalDataSize
+    Helper classes to convert string to DigitalDataSize
     """
+    class _UnitType( object ):
+
+        def __init__( self, regex, n_bytes ):
+            self.regex = regex
+            self.n_bytes = n_bytes
+
+        def _match( self, measure ):
+            return re.match( self.regex, measure.strip() )
+
+        def match_type( self, measure ):
+            return bool( self._match( measure ) )
+
+        def read_length_in_bytes( self, measure ):
+            match = self._match( measure )
+
+            if match:
+                groups = match.groups()
+                numerical_part = groups[ 0 ]
+
+                numerical_part = numerical_part.replace( ",", "." )
+                return float( numerical_part ) * self.n_bytes
+
     class _Converter( object ):
         BYTE_REGEX = r'((\d+)(,\d+){0,1})\s*B$'
         KILO_BYTE_REGEX = r'((\d+)(,\d+){0,1})\s*KB$'
@@ -260,48 +282,17 @@ class DigitalDataSize( object ):
 
         def __init__( self, measure ):
             self.measure = measure
+            self.unit_types = [
+                DigitalDataSize._UnitType( self.BYTE_REGEX, self.BYTE ),
+                DigitalDataSize._UnitType( self.KILO_BYTE_REGEX, self.KILO_BYTE ),
+                DigitalDataSize._UnitType( self.MEGA_BYTE_REGEX, self.MEGA_BYTE )
+            ]
 
-        def retrieve_length_in_bytes( self ):
-            data_regex = None
-            unit_multiplier = None
-
-            if self._is_byte_the_unit():
-                data_regex = self.BYTE_REGEX
-                unit_multiplier = self.BYTE
-
-            elif self._is_kilo_byte_the_unit():
-                data_regex = self.KILO_BYTE_REGEX
-                unit_multiplier = self.KILO_BYTE
-
-            elif self._is_mega_byte_the_unit():
-                data_regex = self.MEGA_BYTE_REGEX
-                unit_multiplier = self.MEGA_BYTE
-
-            if data_regex and unit_multiplier:
-                return self._read_length_in_bytes( data_regex, unit_multiplier )
+        def convert( self ):
+            for unit_type in self.unit_types:
+                if unit_type.match_type( self.measure ):
+                    return unit_type.read_length_in_bytes( self.measure )
 
             raise Exception(
                 "Fail attemp to convert DigitalDataSize with unknown format"
             )
-
-        def _is_byte_the_unit( self ):
-            return self._match_measure( self.BYTE_REGEX )
-
-        def _is_kilo_byte_the_unit( self ):
-            return self._match_measure( self.KILO_BYTE_REGEX )
-
-        def _is_mega_byte_the_unit( self ):
-            return self._match_measure( self.MEGA_BYTE_REGEX )
-
-        def _match_measure( self, regex ):
-            return bool( re.match( regex, self.measure ) )
-
-        def _read_length_in_bytes( self, regex, multiplier ):
-            match = re.match( regex, self.measure.strip() )
-
-            if match:
-                groups = match.groups()
-                numerical_part = groups[ 0 ]
-
-                numerical_part = numerical_part.replace( ",", "." )
-                return float( numerical_part ) * multiplier
