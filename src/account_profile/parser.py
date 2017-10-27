@@ -34,6 +34,10 @@ class BillLine( object ):
         self.destiny = destiny
         self.duration = duration
 
+    def _match_service_type( self, regex ):
+        match = re.search( regex, self.service_type, re.I )
+        return bool( match )
+
     def is_SMS( self ):
         """
         Detect if this bill line is relative to a SMS sending
@@ -42,8 +46,7 @@ class BillLine( object ):
             True if is a SMS sending otherwise return False
         """
 
-        match = re.search( BillLine.SMS_REGEX, self.service_type, re.I )
-        return bool( match )
+        return self._match_service_type( BillLine.SMS_REGEX )
 
     def is_internet( self ):
         """
@@ -53,8 +56,7 @@ class BillLine( object ):
             True if is relative to internet access otherwise return False
         """
 
-        match = re.search( BillLine.INTERNET_REGEX, self.service_type, re.I )
-        return bool( match )
+        return self._match_service_type( BillLine.INTERNET_REGEX )
 
     def retrieve_call_features( self ):
         """
@@ -87,8 +89,7 @@ class BillLine( object ):
             True if is a long distance call  otherwise return False
         """
 
-        match = re.search( BillLine.LONG_DISTANCE_CALL_REGEX, self.service_type, re.I )
-        return bool( match )
+        return self._match_service_type( BillLine.LONG_DISTANCE_CALL_REGEX )
 
     def is_local_call( self ):
         """
@@ -96,8 +97,7 @@ class BillLine( object ):
             True if is a local call  otherwise return False
         """
 
-        match = re.search( BillLine.LOCAL_CALL_REGEX, self.service_type, re.I )
-        return bool( match )
+        return self._match_service_type( BillLine.LOCAL_CALL_REGEX )
 
     def is_destiny_call_mobile( self ):
         """
