@@ -156,7 +156,9 @@ class BillLine( object ):
         if self.is_internet():
             return core.DigitalDataSize( self.duration )
 
-        raise Exception( "Fail attemp to read duration as call internet usage" )
+        raise Exception(
+            "Fail attemp to retrieve internet usage from a bill line of other service type"
+        )
 
     @staticmethod
     def from_csv_line( csv_line ):
