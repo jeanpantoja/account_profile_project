@@ -17,41 +17,45 @@ class Profile( object ):
         """
         self.calls.append( call )
 
+    def _get_call_usage( self, condition ):
+        usage = Call.sum_duration( self.calls, condition )
+        return usage
+
     def get_long_distance_landline_call_usage( self ):
         """
         Returns:
             A value representing the usage in minutes
         """
-        condition = lambda call: call.is_long_distance() and call.is_destiny_landline()
-        usage = Call.sum_duration( self.calls, condition )
-        return usage
+        return self._get_call_usage(
+            lambda call: call.is_long_distance() and call.is_destiny_landline()
+        )
 
     def get_long_distance_mobile_call_usage( self ):
         """
         Returns:
             A value representing the usage in minutes
         """
-        condition = lambda call: call.is_long_distance() and call.is_destiny_mobile()
-        usage = Call.sum_duration( self.calls, condition )
-        return usage
+        return self._get_call_usage(
+            lambda call: call.is_long_distance() and call.is_destiny_mobile()
+        )
 
     def get_local_landline_call_usage( self ):
         """
         Returns:
             A value representing the usage in minutes
         """
-        condition = lambda call: call.is_local() and call.is_destiny_landline()
-        usage = Call.sum_duration( self.calls, condition )
-        return usage
+        return self._get_call_usage(
+            lambda call: call.is_local() and call.is_destiny_landline()
+        )
 
     def get_local_mobile_call_usage( self ):
         """
         Returns:
             A value representing the usage in minutes
         """
-        condition = lambda call: call.is_local() and call.is_destiny_mobile()
-        usage = Call.sum_duration( self.calls, condition )
-        return usage
+        return self._get_call_usage(
+            lambda call: call.is_local() and call.is_destiny_mobile()
+        )
 
     def add_SMS( self, n_units ):
         """
