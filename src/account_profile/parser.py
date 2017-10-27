@@ -38,6 +38,16 @@ class BillLine( object ):
         match = re.search( regex, self.service_type, re.I )
         return bool( match )
 
+    def _match_destiny( self, regex ):
+        match = re.search( regex, self.destiny, re.I )
+        return bool( match )
+
+    def _math_destiny_call( self, regex ):
+        matchService = self._match_service_type( regex )
+        matchDest = self._match_destiny( regex )
+
+        return self.is_call() and ( matchDest or matchService )
+
     def is_SMS( self ):
         """
         Detect if this bill line is relative to a SMS sending
@@ -105,13 +115,7 @@ class BillLine( object ):
             True if is a call to a mobile phone otherwise return False
         """
 
-        matchService = re.search( BillLine.DEST_CALL_MOBILE_REGEX,
-                                  self.service_type, re.I )
-
-        matchDest = re.search( BillLine.DEST_CALL_MOBILE_REGEX,
-                               self.destiny, re.I )
-
-        return bool( self.is_call() and ( matchDest or matchService ) )
+        return self._math_destiny_call( BillLine.DEST_CALL_MOBILE_REGEX )
 
     def is_destiny_call_landline( self ):
         """
@@ -119,13 +123,7 @@ class BillLine( object ):
             True if is a call to a landline phone otherwise return False
         """
 
-        matchService = re.search( BillLine.DEST_CALL_LANDLINE_REGEX,
-                                  self.service_type, re.I )
-
-        matchDest = re.search( BillLine.DEST_CALL_LANDLINE_REGEX,
-                               self.destiny, re.I )
-
-        return bool( self.is_call() and ( matchDest or matchService ) )
+        return self._math_destiny_call( BillLine.DEST_CALL_LANDLINE_REGEX )
 
     def is_call( self ):
         return self.is_local_call() or self.is_long_distance_call()
