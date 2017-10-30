@@ -51,4 +51,18 @@ describe AccountProfiler::Parser::AccountLine do
             expect( response ).to eq true
         end
     end
+
+    context "When testing account line destiny" do
+        it "Should reponse true when destiny match pattern" do
+            account_line = AccountProfiler::Parser::AccountLine.new(
+                "000-00000-0000",
+                "TIM Torpedo",
+                "",
+                "SC FIXO - AREA 48"
+            )
+            pattern = /fixo/i
+            response = account_line.match_destiny?( pattern )
+            expect( response ).to eq true
+        end
+    end
 end

@@ -43,6 +43,10 @@ module AccountProfiler
             def match_service_description?( regex )
                 return ( regex =~ @service_description ) != nil
             end
+
+            def match_destiny?( regex )
+                return ( regex =~ @destiny ) != nil
+            end
         end
     end
 end
