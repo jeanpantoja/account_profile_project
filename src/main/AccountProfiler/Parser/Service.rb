@@ -5,8 +5,8 @@ module AccountProfiler
                 @type_regex = type_regex
             end
 
-            def service?( type_text )
-                ( type_text =~ @type_regex ) != nil
+            def service?( account_line )
+                account_line.match_service_description?( @type_regex )
             end
         end
     end

@@ -1,25 +1,41 @@
 require "AccountProfiler/Parser/SMSService"
+require "AccountProfiler/Parser/AccountLine"
 
 describe AccountProfiler::Parser::SMSService do
-    context "When detecting SMS service using service description" do
-        it "Should reponse true when service_description is" do
+    context "When detecting if account line is SMS service" do
+        it "Should reponse true when account line service description is sms" do
+            account_line = AccountProfiler::Parser::AccountLine.new(
+                "000-00000-0000",
+                "Tim Torpedo",
+                "",
+                "SC FIXO - AREA 48"
+            )
             service = AccountProfiler::Parser::SMSService.new()
-            service_description = "TIM torpedo"
-            response = service.service?( service_description )
+            response = service.service?( account_line )
             expect( response ).to eq true
         end
 
-        it "Should reponse true when service_description is" do
+        it "Should reponse true when account line service description is sms" do
+            account_line = AccountProfiler::Parser::AccountLine.new(
+                "000-00000-0000",
+                "  Tim  Torpedo ",
+                "",
+                "SC FIXO - AREA 48"
+            )
             service = AccountProfiler::Parser::SMSService.new()
-            service_description = "  TIM    torpedo  "
-            response = service.service?( service_description )
+            response = service.service?( account_line )
             expect( response ).to eq true
         end
 
-        it "Should reponse true when service_description is" do
+        it "Should reponse true when account line service description is sms" do
+            account_line = AccountProfiler::Parser::AccountLine.new(
+                "000-00000-0000",
+                "  tim torpedo",
+                "",
+                "SC FIXO - AREA 48"
+            )
             service = AccountProfiler::Parser::SMSService.new()
-            service_description = "tim torpedo"
-            response = service.service?( service_description )
+            response = service.service?( account_line )
             expect( response ).to eq true
         end
     end

@@ -1,25 +1,41 @@
 require "AccountProfiler/Parser/InternetService"
+require "AccountProfiler/Parser/AccountLine"
 
 describe AccountProfiler::Parser::InternetService do
-    context "When detecting internet service using service description" do
-        it "Should reponse true when service_description is" do
+    context "When detecting if account line is internet service" do
+        it "Should reponse true when account_line service description is internet" do
+            account_line = AccountProfiler::Parser::AccountLine.new(
+                "000-00000-0000",
+                "TIM Connect Fast",
+                "",
+                "SC FIXO - AREA 48"
+            )
             service = AccountProfiler::Parser::InternetService.new()
-            service_description = "TIM Connect Fast"
-            response = service.service?( service_description )
+            response = service.service?( account_line )
             expect( response ).to eq true
         end
 
-        it "Should reponse true when service_description is" do
+        it "Should reponse true when account_line service description is internet" do
+            account_line = AccountProfiler::Parser::AccountLine.new(
+                "000-00000-0000",
+                "TIM Wap Fast",
+                "",
+                "SC FIXO - AREA 48"
+            )
             service = AccountProfiler::Parser::InternetService.new()
-            service_description = "TIM Wap Fast"
-            response = service.service?( service_description )
+            response = service.service?( account_line )
             expect( response ).to eq true
         end
 
-        it "Should reponse true when service_description is" do
+        it "Should reponse true when account_line service description is internet" do
+            account_line = AccountProfiler::Parser::AccountLine.new(
+                "000-00000-0000",
+                "BlackBerry Professional - MB",
+                "",
+                "SC FIXO - AREA 48"
+            )
             service = AccountProfiler::Parser::InternetService.new()
-            service_description = "BlackBerry Professional - MB"
-            response = service.service?( service_description )
+            response = service.service?( account_line )
             expect( response ).to eq true
         end
     end
