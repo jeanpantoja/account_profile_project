@@ -4,7 +4,7 @@ describe AccountProfiler::Profile::CallUsageProfile do
     context "When testing CallUsageProfile addition" do
         it "A call usage profile plus yourself must result in double of all values" do
             call = AccountProfiler::Profile::CallUsageProfile.new(
-                1,2,3,4
+                1, 2, 3, 4
             )
 
             call_result = call + call
