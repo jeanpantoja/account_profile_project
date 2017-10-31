@@ -1,5 +1,3 @@
-require "AccountProfiler/Parser/Service"
-
 module AccountProfiler
     module Parser
         class CallDuration
