@@ -10,7 +10,7 @@ describe AccountProfiler::Parser::AccountLine do
             array = [
                 "", "", "", phone_number, "",
                 "", service_description, "", "", "",
-                duration, "", "", destiny, "",
+                destiny, "", "", duration, "",
                 "", "", "", "", "",
                 "", "", "", "", ""
             ]

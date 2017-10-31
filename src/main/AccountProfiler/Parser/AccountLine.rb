@@ -3,8 +3,8 @@ module AccountProfiler
         class AccountLine
             @@PHONE_NUMBER_INDEX = 3
             @@SERVICE_DESCRIPTION_INDEX = 6
-            @@DURATION_INDEX = 10
-            @@DESTINY_INDEX = 13
+            @@DESTINY_INDEX = 10
+            @@DURATION_INDEX = 13
 
             def initialize( phone_number,
                            service_description,

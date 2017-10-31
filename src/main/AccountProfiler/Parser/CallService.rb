@@ -5,7 +5,7 @@ module AccountProfiler
         class CallService < Service
             @@CALL_REGEX = /Chamadas\s+(Locais|Longa)/i
             @@LOCAL_CALL_REGEX =/Chamadas\s+Locais/i
-            @@LONG_DISTANCE_REGEX = /Chamadas\s+Longa\s+Dist/
+            @@LONG_DISTANCE_REGEX = /Chamadas\s+Longa\s+Dist/i
             @@MOBILE_CALL_REGEX = /celulares|movel/i
             @@LANDLINE_CALL_REGEX = /fixo/i
 

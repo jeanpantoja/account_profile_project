@@ -22,7 +22,7 @@ describe AccountProfiler::Parser::LongDistanceMobileCallService do
                 "000-00000-0000",
                 "Chamadas Locais para Outros Telefones Fixos",
                 "01m:10s",
-                "SC MOVEL TIM - AREA 48"
+                "SC FIXO TIM - AREA 48"
             )
             service = AccountProfiler::Parser::LongDistanceMobileCallService.new()
             response = service.service?( account_line )
@@ -30,7 +30,7 @@ describe AccountProfiler::Parser::LongDistanceMobileCallService do
         end
 
         it "Should reponse false when account_line service description
-                is to local distance" do
+                is to local call" do
             account_line = AccountProfiler::Parser::AccountLine.new(
                 "000-00000-0000",
                 "Chamadas Locais para Outros Telefones Fixos",
