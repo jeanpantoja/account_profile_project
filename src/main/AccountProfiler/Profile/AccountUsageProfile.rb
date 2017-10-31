@@ -1,3 +1,5 @@
+require "AccountProfiler/Profile/CallUsageProfile"
+
 module AccountProfiler
     module Profile
         class AccountUsageProfile
@@ -48,6 +50,22 @@ module AccountProfiler
 
             def local_landline_call_usage=( value )
                 @call_usage_profile.local_landline = value
+            end
+
+            def long_distance_mobile_call_usage()
+                @call_usage_profile.long_distance_mobile
+            end
+
+            def long_distance_landline_call_usage()
+                @call_usage_profile.long_distance_landline
+            end
+
+            def local_mobile_call_usage()
+                @call_usage_profile.local_mobile
+            end
+
+            def local_landline_call_usage()
+                @call_usage_profile.local_landline
             end
 
             def << ( other )
