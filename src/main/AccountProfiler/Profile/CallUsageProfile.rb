@@ -1,11 +1,16 @@
 module AccountProfiler
     module Profile
         class CallUsageProfile
-            def initialize()
-                @long_distance_mobile = 0
-                @long_distance_landline = 0
-                @local_mobile = 0
-                @local_landline = 0
+            def initialize(
+                local_mobile = 0,
+                local_landline = 0,
+                long_distance_mobile = 0,
+                long_distance_landline = 0
+            )
+                @local_mobile = local_mobile
+                @local_landline = local_landline
+                @long_distance_mobile = long_distance_mobile
+                @long_distance_landline = long_distance_landline
             end
 
             def long_distance_mobile()
