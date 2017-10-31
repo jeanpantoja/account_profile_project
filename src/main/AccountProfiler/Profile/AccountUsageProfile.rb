@@ -22,6 +22,18 @@ module AccountProfiler
                 @call_usage_profile
             end
 
+            def sms_usage( value )
+                @sms_usage = value
+            end
+
+            def internet_usage( value )
+                @internet_usage = value
+            end
+
+            def call_usage_profile( value )
+                @call_usage_profile = value
+            end
+
             def << ( other )
                 @sms_usage += other.sms_usage
                 @internet_usage += other.internet_usage
