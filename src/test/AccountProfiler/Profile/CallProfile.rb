@@ -1,10 +1,10 @@
-require "AccountProfiler/Profile/Call"
+require "AccountProfiler/Profile/CallProfile"
 
-describe AccountProfiler::Profile::Call do
+describe AccountProfiler::Profile::CallProfile do
     context "When testing Call addition" do
         it "A call with all usage set as 1  plus yourself must result
             in a call profile with all usage equals 2" do
-            call = AccountProfiler::Profile::Call.new()
+            call = AccountProfiler::Profile::CallProfile.new()
 
             call.local_mobile = 1
             call.local_landline = 1

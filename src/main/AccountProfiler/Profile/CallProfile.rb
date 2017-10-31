@@ -1,6 +1,6 @@
 module AccountProfiler
     module Profile
-        class Call
+        class CallProfile
             def initialize()
                 @long_distance_mobile = 0
                 @long_distance_landline = 0
@@ -41,7 +41,7 @@ module AccountProfiler
             end
 
             def + ( other )
-                call = Call.new()
+                call = CallProfile.new()
                 call << other
                 call << self
                 return call
