@@ -1,4 +1,5 @@
 require "AccountProfiler/Parser/CallService"
+require "AccountProfiler/Profile/AccountUsageProfile"
 
 module AccountProfiler
     module Parser
@@ -7,6 +8,13 @@ module AccountProfiler
                 super( account_line ) &&
                     is_local?( account_line ) &&
                     is_destiny_landline?( account_line )
+            end
+
+            def get_usage_profile( account_line )
+                duration = get_duration( account_line )
+                usage = AccountProfiler::Profile::AccountUsageProfile.new()
+                usage.local_landline_call_usage = duration.minutes()
+                return usage
             end
         end
     end

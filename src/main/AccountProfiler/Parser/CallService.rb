@@ -1,4 +1,5 @@
 require "AccountProfiler/Parser/Service"
+require "AccountProfiler/Parser/CallDuration"
 
 module AccountProfiler
     module Parser
@@ -29,6 +30,12 @@ module AccountProfiler
 
             def is_long_distance?( account_line )
                 account_line.match_service_description?( @@LONG_DISTANCE_REGEX )
+            end
+
+            def get_duration( account_line )
+                return AccountProfiler::Parser::CallDuration.from_string(
+                    account_line.duration()
+                )
             end
         end
     end
