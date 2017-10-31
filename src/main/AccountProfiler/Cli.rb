@@ -6,15 +6,38 @@ require "AccountProfiler/Parser/AccountReader"
 module AccountProfiler
     module Cli
         class Program
-            def run( csv_file_path, phone_number )
+            def run()
+                begin
+                    args = load_args()
+                    csv_file_path = args[ "csv_file" ]
+                    phone_number = args[ "phone_number" ]
 
-                profiler = AccountProfiler::Parser::AccountReader.build_profiler_from_csv(
-                    csv_file_path
-                )
+                    profiler = AccountProfiler::Parser::AccountReader.build_profiler_from_csv(
+                        csv_file_path
+                    )
 
-                profile = profiler.resume( phone_number )
-                json_text = create_profile_json( profile, phone_number )
-                puts json_text
+                    profile = profiler.resume( phone_number )
+                    json_text = create_profile_json( profile, phone_number )
+                    puts json_text
+                rescue StandardError=>e
+                    puts "Error: #{e}"
+                    exit
+                end
+            end
+
+            def load_args()
+                if ARGV.length < 2
+                    raise "
+                        The program must csv_file and phone_number
+                        in this order as argument
+                    "
+                end
+
+                args = {
+                    "csv_file" => ARGV[ 0 ],
+                    "phone_number"  => ARGV[ 1 ]
+                }
+                return args
             end
 
             def create_profile_json( usage_profile, phone_number )
