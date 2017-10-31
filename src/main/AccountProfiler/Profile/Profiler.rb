@@ -15,7 +15,7 @@ module AccountProfiler
                     @usage_profile_map[ phone_number ] = profiles
                 end
 
-                profiles[ profiles.size() ] = account_usage_profile
+                profiles << account_usage_profile
                 @usage_profile_map[ phone_number ] = profiles
             end
 
