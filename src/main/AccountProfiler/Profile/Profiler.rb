@@ -24,7 +24,7 @@ module AccountProfiler
 
                 if profiles == nil
                     raise ArgumentError,
-                        "Not exist accounte profile for phone_number[#{phone_number}]"
+                        "Not exist account profile for phone_number[#{phone_number}]"
                 end
 
                 resumed_profile = AccountProfiler::Profile::AccountUsageProfile.new()
