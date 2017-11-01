@@ -46,6 +46,7 @@ module AccountProfiler
                         if service.service?( acc_line )
                             usage_profile = service.get_usage_profile( acc_line )
                             profiler.insert( acc_line.phone_number, usage_profile)
+                            break
                         end
                     end
                 end
