@@ -3,13 +3,11 @@
 require "csv"
 require "json"
 
-require "account_profiler"
-#begin
-#    require "account_profiler"
-#rescue LoadError
-#    require_relative "../lib/account_profiler"
-#    puts "Loading local"
-#end
+begin
+    require "account_profiler"
+rescue LoadError
+    require_relative "../lib/account_profiler"
+end
 
 class Program
     def run()
