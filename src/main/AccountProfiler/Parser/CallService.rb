@@ -1,5 +1,5 @@
-require "AccountProfiler/Parser/Service"
-require "AccountProfiler/Parser/CallDuration"
+require_relative "Service"
+require_relative "CallDuration"
 
 module AccountProfiler
     module Parser

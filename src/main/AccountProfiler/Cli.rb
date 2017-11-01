@@ -1,7 +1,7 @@
 require "csv"
 require "json"
 
-require "AccountProfiler/Parser/AccountReader"
+require_relative "Parser/AccountReader"
 
 module AccountProfiler
     module Cli

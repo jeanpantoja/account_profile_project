@@ -1,5 +1,5 @@
-require "AccountProfiler/Parser/CallService"
-require "AccountProfiler/Profile/AccountUsageProfile"
+require_relative "CallService"
+require_relative "../Profile/AccountUsageProfile"
 
 module AccountProfiler
     module Parser
