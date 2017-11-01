@@ -1,4 +1,4 @@
-require "AccountProfiler/Profile/CallUsageProfile"
+require "account_profiler/Profile/CallUsageProfile"
 
 describe AccountProfiler::Profile::CallUsageProfile do
     context "When testing CallUsageProfile addition" do

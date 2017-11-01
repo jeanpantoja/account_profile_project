@@ -1,5 +1,5 @@
-require "AccountProfiler/Parser/LongDistanceLandlineCallService"
-require "AccountProfiler/Parser/AccountLine"
+require "account_profiler/Parser/LongDistanceLandlineCallService"
+require "account_profiler/Parser/AccountLine"
 
 describe AccountProfiler::Parser::LongDistanceLandlineCallService do
     context "When detecting if account line is long distance landline call service" do

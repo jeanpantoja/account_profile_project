@@ -1,43 +1,30 @@
-require "AccountProfiler/Parser/LocalLandlineCallService"
-require "AccountProfiler/Parser/AccountLine"
+require "account_profiler/Parser/LocalMobileCallService"
+require "account_profiler/Parser/AccountLine"
 
-describe AccountProfiler::Parser::LocalLandlineCallService do
-    context "When detecting if account line is locallandline call service" do
+describe AccountProfiler::Parser::LocalMobileCallService do
+    context "When detecting if account line is local mobile call service" do
         it "Should reponse true when account_line service description
-                is local landline call and destiny is landline phone" do
+                is local call and destiny is mobile phone" do
             account_line = AccountProfiler::Parser::AccountLine.new(
                 "000-00000-0000",
-                "Chamadas Locais para Telefones Fixos",
+                "Chamadas Locais para Celulares TIM",
                 "01m:10s",
-                "SC FIXO - AREA 48"
+                "SC MOVEL TIM - AREA 48"
             )
-            service = AccountProfiler::Parser::LocalLandlineCallService.new()
-            response = service.service?( account_line )
-            expect( response ).to eq true
-        end
-
-    it "Should reponse true when account_line service description
-                is local landline call and destiny is landline phone" do
-            account_line = AccountProfiler::Parser::AccountLine.new(
-                "000-00000-0000",
-                "Chamadas Locais",
-                "01m:10s",
-                "SC FIXO - AREA 48"
-            )
-            service = AccountProfiler::Parser::LocalLandlineCallService.new()
+            service = AccountProfiler::Parser::LocalMobileCallService.new()
             response = service.service?( account_line )
             expect( response ).to eq true
         end
 
         it "Should reponse true when account_line service description
-                is local landline call" do
+                is local mobile call" do
             account_line = AccountProfiler::Parser::AccountLine.new(
                 "000-00000-0000",
-                "Chamadas Locais para Telefones Fixos",
+                "Chamadas Locais para Celulares TIM",
                 "01m:10s",
                 "SC TIM - AREA 48"
             )
-            service = AccountProfiler::Parser::LocalLandlineCallService.new()
+            service = AccountProfiler::Parser::LocalMobileCallService.new()
             response = service.service?( account_line )
             expect( response ).to eq true
         end
@@ -50,7 +37,7 @@ describe AccountProfiler::Parser::LocalLandlineCallService do
                 "01m:10s",
                 "SC MOVEL TIM - AREA 48"
             )
-            service = AccountProfiler::Parser::LocalLandlineCallService.new()
+            service = AccountProfiler::Parser::LocalMobileCallService.new()
             response = service.service?( account_line )
             expect( response ).to eq false
         end
@@ -63,7 +50,7 @@ describe AccountProfiler::Parser::LocalLandlineCallService do
                 "01m:10s",
                 "SC FIXO TIM - AREA 48"
             )
-            service = AccountProfiler::Parser::LocalLandlineCallService.new()
+            service = AccountProfiler::Parser::LocalMobileCallService.new()
             response = service.service?( account_line )
             expect( response ).to eq false
         end
