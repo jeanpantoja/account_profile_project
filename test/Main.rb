@@ -1,0 +1,16 @@
+$LOAD_PATH << './lib'
+
+require_relative "AccountProfiler/Parser/SMSService"
+require_relative "AccountProfiler/Parser/InternetService"
+require_relative "AccountProfiler/Parser/AccountLine"
+require_relative "AccountProfiler/Parser/CallService"
+require_relative "AccountProfiler/Parser/LocalMobileCallService"
+require_relative "AccountProfiler/Parser/LocalLandlineCallService"
+require_relative "AccountProfiler/Parser/LongDistanceMobileCallService"
+require_relative "AccountProfiler/Parser/LongDistanceLandlineCallService"
+require_relative "AccountProfiler/Parser/CallDuration"
+require_relative "AccountProfiler/Parser/DigitalDataSize"
+require_relative "AccountProfiler/Parser/AccountReader"
+require_relative "AccountProfiler/Profile/CallUsageProfile"
+require_relative "AccountProfiler/Profile/AccountUsageProfile"
+require_relative "AccountProfiler/Profile/Profiler"
