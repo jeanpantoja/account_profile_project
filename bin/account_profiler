@@ -19,7 +19,7 @@ class Program
       puts json_text
     rescue StandardError=>e
       puts "Error: #{e}"
-      exit
+      exit 1
     end
   end
 
