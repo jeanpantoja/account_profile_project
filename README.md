@@ -5,7 +5,7 @@
 # Dependency:
 * ruby
 * Make
-* rpec
+* rspec
 
 # Running:
 * bin/account_profiler sample-tim.txt 000-0000-0000
