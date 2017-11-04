@@ -16,7 +16,7 @@ module AccountProfiler
                 @destiny = destiny
             end
 
-            def AccountLine.from_array( line_data )
+            def self.from_array( line_data )
                 phone_number = line_data[ @@PHONE_NUMBER_INDEX ]
                 service_description = line_data[ @@SERVICE_DESCRIPTION_INDEX ]
                 duration = line_data[ @@DURATION_INDEX ]

@@ -8,7 +8,7 @@ module AccountProfiler
                 @seconds = seconds
             end
 
-            def CallDuration.from_string( duration_text )
+            def self.from_string( duration_text )
                 matched = @@DURATION_REGEX.match( duration_text )
 
                 if matched == nil

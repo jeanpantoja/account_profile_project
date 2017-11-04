@@ -27,7 +27,7 @@ module AccountProfiler
                 ]
             end
 
-            def AccountReader.build_profiler_from_csv( csv_file_path )
+            def self.build_profiler_from_csv( csv_file_path )
                 reader = AccountProfiler::Parser::AccountReader.new()
                 csv_lines = CSV.foreach(
                     csv_file_path, col_sep: @@CSV_COLUMN_SEPARATOR

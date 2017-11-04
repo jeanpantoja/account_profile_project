@@ -13,7 +13,7 @@ module AccountProfiler
                 @n_bytes = n_bytes
             end
 
-            def DigitalDataSize.from_string( digital_data_size_text )
+            def self.from_string( digital_data_size_text )
                 types = [
                     DigitalDataType.new( @@BYTE_UNIT, @@BYTE ),
                     DigitalDataType.new( @@KILO_BYTE_UNIT, @@KILO_BYTE ),
