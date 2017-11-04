@@ -3,11 +3,7 @@
 require "csv"
 require "json"
 
-begin
-    require "account_profiler"
-rescue LoadError
-    require_relative "../lib/account_profiler"
-end
+require_relative "../lib/account_profiler"
 
 class Program
     def run()
