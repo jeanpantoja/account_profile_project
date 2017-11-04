@@ -8,8 +8,12 @@
 * rpec
 
 # Running:
-* cd src/main
-* ruby Main.rb sample-tim.txt 000-0000-0000
+* bin/account_profiler sample-tim.txt 000-0000-0000
 
 # Testing:
-* At root path of the project execute make test
+* make test
+
+# Install:
+* make
+* sudo make install
+* then can execute: account_profiler sample-tim.txt 000-0000-0000
