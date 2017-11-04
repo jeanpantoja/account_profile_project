@@ -9,7 +9,7 @@ require_relative "LocalLandlineCallService"
 require_relative "SMSService"
 require_relative "InternetService"
 
-require_relative "../Profile/Profiler"
+require_relative "../profile/Profiler"
 
 module AccountProfiler
     module Parser

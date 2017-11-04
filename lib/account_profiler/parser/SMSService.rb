@@ -1,5 +1,5 @@
 require_relative "Service"
-require_relative "../Profile/AccountUsageProfile"
+require_relative "../profile/AccountUsageProfile"
 
 module AccountProfiler
     module Parser

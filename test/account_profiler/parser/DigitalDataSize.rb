@@ -1,4 +1,4 @@
-require "account_profiler/Parser/DigitalDataSize"
+require "account_profiler/parser/DigitalDataSize"
 
 describe AccountProfiler::Parser::DigitalDataSize do
     context "When creating DigitalDataSize" do

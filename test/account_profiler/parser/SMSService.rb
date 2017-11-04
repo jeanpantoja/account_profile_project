@@ -1,40 +1,40 @@
-require "account_profiler/Parser/InternetService"
-require "account_profiler/Parser/AccountLine"
+require "account_profiler/parser/SMSService"
+require "account_profiler/parser/AccountLine"
 
-describe AccountProfiler::Parser::InternetService do
-    context "When detecting if account line is internet service" do
-        it "Should reponse true when account_line service description is internet" do
+describe AccountProfiler::Parser::SMSService do
+    context "When detecting if account line is SMS service" do
+        it "Should reponse true when account line service description is sms" do
             account_line = AccountProfiler::Parser::AccountLine.new(
                 "000-00000-0000",
-                "TIM Connect Fast",
+                "Tim Torpedo",
                 "",
                 "SC FIXO - AREA 48"
             )
-            service = AccountProfiler::Parser::InternetService.new()
+            service = AccountProfiler::Parser::SMSService.new()
             response = service.service?( account_line )
             expect( response ).to eq true
         end
 
-        it "Should reponse true when account_line service description is internet" do
+        it "Should reponse true when account line service description is sms" do
             account_line = AccountProfiler::Parser::AccountLine.new(
                 "000-00000-0000",
-                "TIM Wap Fast",
+                "  Tim  Torpedo ",
                 "",
                 "SC FIXO - AREA 48"
             )
-            service = AccountProfiler::Parser::InternetService.new()
+            service = AccountProfiler::Parser::SMSService.new()
             response = service.service?( account_line )
             expect( response ).to eq true
         end
 
-        it "Should reponse true when account_line service description is internet" do
+        it "Should reponse true when account line service description is sms" do
             account_line = AccountProfiler::Parser::AccountLine.new(
                 "000-00000-0000",
-                "BlackBerry Professional - MB",
+                "  tim torpedo",
                 "",
                 "SC FIXO - AREA 48"
             )
-            service = AccountProfiler::Parser::InternetService.new()
+            service = AccountProfiler::Parser::SMSService.new()
             response = service.service?( account_line )
             expect( response ).to eq true
         end

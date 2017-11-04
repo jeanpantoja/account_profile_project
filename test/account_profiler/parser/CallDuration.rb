@@ -1,4 +1,4 @@
-require "account_profiler/Parser/CallDuration"
+require "account_profiler/parser/CallDuration"
 
 describe AccountProfiler::Parser::CallDuration do
     context "When creating CallDuration" do

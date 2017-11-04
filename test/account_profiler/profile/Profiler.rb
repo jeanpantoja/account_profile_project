@@ -1,6 +1,6 @@
-require "account_profiler/Profile/AccountUsageProfile"
-require "account_profiler/Profile/CallUsageProfile"
-require "account_profiler/Profile/Profiler"
+require "account_profiler/profile/AccountUsageProfile"
+require "account_profiler/profile/CallUsageProfile"
+require "account_profiler/profile/Profiler"
 
 describe AccountProfiler::Profile::Profiler do
     context "When testing Profiler resume" do

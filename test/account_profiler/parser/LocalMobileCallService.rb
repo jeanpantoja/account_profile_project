@@ -1,5 +1,5 @@
-require "account_profiler/Parser/LocalMobileCallService"
-require "account_profiler/Parser/AccountLine"
+require "account_profiler/parser/LocalMobileCallService"
+require "account_profiler/parser/AccountLine"
 
 describe AccountProfiler::Parser::LocalMobileCallService do
     context "When detecting if account line is local mobile call service" do

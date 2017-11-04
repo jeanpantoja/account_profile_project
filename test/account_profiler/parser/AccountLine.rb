@@ -1,4 +1,4 @@
-require "account_profiler/Parser/AccountLine"
+require "account_profiler/parser/AccountLine"
 
 describe AccountProfiler::Parser::AccountLine do
     context "When testing account line creation" do

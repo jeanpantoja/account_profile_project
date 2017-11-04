@@ -1,5 +1,5 @@
-require "account_profiler/Parser/LocalLandlineCallService"
-require "account_profiler/Parser/AccountLine"
+require "account_profiler/parser/LocalLandlineCallService"
+require "account_profiler/parser/AccountLine"
 
 describe AccountProfiler::Parser::LocalLandlineCallService do
     context "When detecting if account line is locallandline call service" do
