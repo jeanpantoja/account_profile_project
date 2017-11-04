@@ -1,4 +1,4 @@
-require_relative "account_profiler/parser/AccountReader"
+require_relative "account_profiler/parser/account_reader"
 
 module AccountProfiler
     def AccountProfiler.create_profiler( csv_file_path )

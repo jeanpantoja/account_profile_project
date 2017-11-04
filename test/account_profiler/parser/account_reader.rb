@@ -1,4 +1,4 @@
-require "account_profiler/parser/AccountReader"
+require "account_profiler/parser/account_reader"
 
 def create_account_line( phone_number, service_description, destiny, duration )
     line = [

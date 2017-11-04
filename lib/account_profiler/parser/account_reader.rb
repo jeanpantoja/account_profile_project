@@ -1,15 +1,15 @@
 require "csv"
 require "json"
 
-require_relative "AccountLine"
-require_relative "LongDistanceMobileCallService"
-require_relative "LongDistanceLandlineCallService"
-require_relative "LocalMobileCallService"
-require_relative "LocalLandlineCallService"
-require_relative "SMSService"
-require_relative "InternetService"
+require_relative "account_line"
+require_relative "long_distance_mobile_call_service"
+require_relative "long_distance_landline_call_service"
+require_relative "local_mobile_call_service"
+require_relative "local_landline_call_service"
+require_relative "sms_service"
+require_relative "internet_service"
 
-require_relative "../profile/Profiler"
+require_relative "../profile/profiler"
 
 module AccountProfiler
     module Parser

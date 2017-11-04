@@ -1,4 +1,4 @@
-require_relative "AccountUsageProfile"
+require_relative "account_usage_profile"
 
 module AccountProfiler
     module Profile

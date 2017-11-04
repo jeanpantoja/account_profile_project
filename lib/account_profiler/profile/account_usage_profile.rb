@@ -1,4 +1,4 @@
-require_relative "CallUsageProfile"
+require_relative "call_usage_profile"
 
 module AccountProfiler
      module Profile

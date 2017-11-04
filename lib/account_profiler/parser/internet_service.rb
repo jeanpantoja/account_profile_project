@@ -1,5 +1,5 @@
-require_relative "Service"
-require_relative "DigitalDataSize"
+require_relative "service"
+require_relative "digital_data_size"
 
 module AccountProfiler
     module Parser

@@ -1,5 +1,5 @@
-require "account_profiler/parser/CallService"
-require "account_profiler/parser/AccountLine"
+require "account_profiler/parser/call_service"
+require "account_profiler/parser/account_line"
 
 describe AccountProfiler::Parser::CallService do
     context "When detecting if account line is call service" do

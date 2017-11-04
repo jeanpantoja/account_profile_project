@@ -1,5 +1,5 @@
-require "account_profiler/profile/AccountUsageProfile"
-require "account_profiler/profile/CallUsageProfile"
+require "account_profiler/profile/account_usage_profile"
+require "account_profiler/profile/call_usage_profile"
 
 describe AccountProfiler::Profile::AccountUsageProfile do
     context "When testing AccountUsageProfile addition" do
